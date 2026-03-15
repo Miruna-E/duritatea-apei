@@ -3,346 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="proiect_chimie.css">
+    <script src="proiect_chimie.js" defer></script>
     <title>Simulator de laborator: Duritatea Apei</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e24;
-            color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .laborator {
-            background-color: #2b2b36;
-            padding: 1.875rem 3.75rem;
-            border-radius: 0.9375rem;
-            box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.8);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .ansamblu-biureta {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 0.3125rem;
-            z-index: 10;
-        }
-
-        .cilindru-biureta {
-            width: 1.5rem;
-            height: 14.375rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 0.125rem solid rgba(200, 200, 200, 0.4);
-            border-bottom: none;
-            border-radius: 0.25rem 0.25rem 0 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cilindru-biureta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right,
-                    rgba(0, 0, 0, 0.05) 0%,
-                    rgba(255, 255, 255, 0.7) 20%,
-                    transparent 40%,
-                    rgba(0, 0, 0, 0.2) 85%,
-                    rgba(255, 255, 255, 0.3) 100%);
-            z-index: 4;
-            pointer-events: none;
-        }
-
-        .gradatii-biureta {
-            position: absolute;
-            top: 1.25rem;
-            left: 0;
-            width: 100%;
-            height: 9.4375rem;
-            background-image:
-                repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0, rgba(0, 0, 0, 0.85) 0.125rem, transparent 0.125rem, transparent 1.875rem),
-                repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.5) 0.0625rem, transparent 0.0625rem, transparent 0.9375rem);
-            background-size: 0.625rem 100%, 0.3125rem 100%;
-            background-position: left top;
-            background-repeat: no-repeat;
-            z-index: 5;
-        }
-
-        .numere-biureta {
-            position: absolute;
-            top: 1.25rem;
-            left: 0.75rem;
-            width: 100%;
-            height: 9.375rem;
-            z-index: 6;
-            color: #111;
-            font-size: 0.625rem;
-            font-weight: 800;
-        }
-
-        .numere-biureta span {
-            position: absolute;
-            transform: translateY(-50%);
-            left: 0;
-        }
-
-        .lichid-biureta {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 13.125rem;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3) 20%, transparent 40%, rgba(0, 0, 0, 0.1) 90%);
-            transition: height 0.4s ease-out;
-            z-index: 1;
-        }
-
-        .ingustare-cilindru-biureta {
-            width: 1.5rem;
-            height: 1.5625rem;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 0%, rgba(255, 255, 255, 0.6) 20%, transparent 40%, rgba(0, 0, 0, 0.2) 85%, rgba(255, 255, 255, 0.2) 100%);
-            clip-path: polygon(0 0, 100% 0, 65% 100%, 35% 100%);
-            border-left: 0.125rem solid rgba(200, 200, 200, 0.4);
-            border-right: 0.125rem solid rgba(200, 200, 200, 0.4);
-        }
-
-        .ansamblu-robinet {
-            width: 2.75rem;
-            height: 1.25rem;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: -0.0625rem;
-            z-index: 3;
-        }
-
-        .cilindru-robinet {
-            width: 2.25rem;
-            height: 0.875rem;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(200, 200, 200, 0.6), rgba(255, 255, 255, 0.4));
-            border: 0.0625rem solid rgba(150, 150, 150, 0.8);
-            border-radius: 0.1875rem;
-            position: absolute;
-        }
-
-        .maner-robinet {
-            width: 0.5rem;
-            height: 1.625rem;
-            background: linear-gradient(to right, #dc2626, #991b1b);
-            border-radius: 0.125rem;
-            position: absolute;
-            right: 0;
-            box-shadow: -0.0625rem 0.125rem 0.1875rem rgba(0, 0, 0, 0.4);
-        }
-
-        .varf-biureta {
-            width: 0.5rem;
-            height: 3.75rem;
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.8) 30%, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
-            clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-            margin-top: -0.0625rem;
-            position: relative;
-            z-index: 3;
-        }
-
-        .picatura {
-            width: 0.5625rem;
-            height: 0.5625rem;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 0 50% 50% 50%;
-            transform: rotate(45deg);
-            position: absolute;
-            bottom: -0.3125rem;
-            opacity: 0;
-            z-index: 2;
-            box-shadow: inset -0.0625rem -0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
-        }
-
-        .picatura.animatie-cadere {
-            animation: cadere 0.4s cubic-bezier(0.5, 0, 1, 1) forwards;
-        }
-
-        @keyframes cadere {
-            0% {
-                opacity: 1;
-                bottom: -0.3125rem;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-                bottom: -11.25rem;
-            }
-        }
-
-        .pahar {
-            width: 12.5rem;
-            height: 13.75rem;
-            position: relative;
-            margin-top: 0.3125rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 0.125rem solid rgba(200, 200, 200, 0.4);
-            border-top: none;
-            z-index: 5;
-        }
-
-        .gradatii-pahar {
-            position: absolute;
-            bottom: 0;
-            right: 3.4375rem;
-            width: 3.125rem;
-            height: 100%;
-            z-index: 5;
-        }
-
-        .linie-mare-gradatie-pahar {
-            position: absolute;
-            right: 0;
-            width: 1.25rem;
-            height: 0.125rem;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .linie-mica-gradatie-pahar {
-            position: absolute;
-            right: 0;
-            width: 0.625rem;
-            height: 0.0625rem;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .numar-pahar {
-            position: absolute;
-            right: 1.75rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.75rem;
-            font-weight: bold;
-            transform: translateY(50%);
-            text-align: right;
-        }
-
-        .lichid-pahar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1.5625rem;
-            background-color: #fde047;
-            transition: background-color 1.5s ease, height 0.4s ease-out;
-            z-index: 1;
-            opacity: 0.9;
-        }
-
-        .panou-butoane {
-            margin-top: 1.875rem;
-            display: flex;
-            gap: 0.9375rem;
-            position: relative;
-            z-index: 100;
-        }
-
-        button {
-            color: white;
-            border: none;
-            padding: 0.875rem 1.75rem;
-            font-size: 1rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.2);
-        }
-
-        #butonAdaugaPicatura {
-            background-color: #3b82f6;
-        }
-
-        #butonAdaugaPicatura:hover {
-            background-color: #2563eb;
-            transform: translateY(-0.125rem);
-        }
-
-        #butonAdaugaPicatura:disabled {
-            background-color: #64748b;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        #butonResetare {
-            background-color: #ef4444;
-            display: none;
-        }
-
-        #butonResetare:hover {
-            background-color: #dc2626;
-            transform: translateY(-0.125rem);
-        }
-
-        .panou-informatii {
-            margin-top: 1.25rem;
-            font-size: 1rem;
-            text-align: left;
-            display: inline-block;
-            background: #333340;
-            padding: 0.9375rem 1.5625rem;
-            border-radius: 0.625rem;
-            box-shadow: inset 0 0 0.625rem rgba(0, 0, 0, 0.3);
-        }
-
-        .panou-informatii p {
-            margin: 0.5rem 0;
-        }
-
-        .text-culoare {
-            font-weight: bold;
-            color: #fde047;
-            transition: color 1s ease;
-        }
-
-        .text-duritate {
-            font-weight: bold;
-            color: #4ade80;
-            display: none;
-            margin-top: 0.625rem;
-            border-top: 0.0625rem solid #555;
-            padding-top: 0.625rem;
-        }
-    </style>
 </head>
 
 <body>
 
     <div class="laborator">
-        <h2 style="margin-top:0; color:#e2e8f0;">Duritatea Apei</h2>
+        <h2>Duritatea Apei</h2>
 
         <div class="ansamblu-biureta">
             <div class="cilindru-biureta">
                 <div class="gradatii-biureta"></div>
                 <div class="numere-biureta">
-                    <span style="top: 0;">0</span>
-                    <span style="top: 1.875rem;">2</span>
-                    <span style="top: 3.75rem;">4</span>
-                    <span style="top: 5.625rem;">6</span>
-                    <span style="top: 7.5rem;">8</span>
-                    <span style="top: 9.375rem;">10</span>
+                    <span id="nr-birueta0">0</span>
+                    <span id="nr-birueta2">2</span>
+                    <span id="nr-birueta4">4</span>
+                    <span id="nr-birueta6">6</span>
+                    <span id="nr-birueta8">8</span>
+                    <span id="nr-birueta10">10</span>
                 </div>
                 <div id="elementLichidBiureta" class="lichid-biureta"></div>
             </div>
@@ -357,142 +37,35 @@
 
         <div class="pahar">
             <div class="gradatii-pahar">
-                <div class="linie-mare-gradatie-pahar" style="bottom: 1.5625rem;"></div>
-                <span class="numar-pahar" style="bottom: 1.5625rem;">100</span>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 1.9375rem;"></div>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 2.3125rem;"></div>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 2.6875rem;"></div>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 3.0625rem;"></div>
-                <div class="linie-mare-gradatie-pahar" style="bottom: 3.4375rem;"></div>
-                <span class="numar-pahar" style="bottom: 3.4375rem;">110</span>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 3.8125rem;"></div>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 4.1875rem;"></div>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 4.5625rem;"></div>
-                <div class="linie-mica-gradatie-pahar" style="bottom: 4.9375rem;"></div>
-                <div class="linie-mare-gradatie-pahar" style="bottom: 5.3125rem;"></div>
-                <span class="numar-pahar" style="bottom: 5.3125rem;">120</span>
+                <div id="gradatie-pahar1" class="linie-mare-gradatie-pahar"></div>
+                <span id="nr-pahar1" class="numar-pahar">100</span>
+                <div id="gradatie-pahar2" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar3" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar4" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar5" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar6" class="linie-mare-gradatie-pahar"></div>
+                <span id="nr-pahar2" class="numar-pahar">110</span>
+                <div id="gradatie-pahar7" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar8" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar9" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar10" class="linie-mica-gradatie-pahar"></div>
+                <div id="gradatie-pahar11" class="linie-mare-gradatie-pahar"></div>
+                <span id="nr-pahar3" class="numar-pahar">120</span>
             </div>
             <div class="lichid-pahar" id="elementSolutiePahar"></div>
         </div>
 
         <div class="panou-butoane">
-            <button id="butonAdaugaPicatura" onclick="adaugaPicaturaDinBiureta()">Picură 1 ml HCl 0.1 M</button>
-            <button id="butonResetare" onclick="reseteazaTotExperimentul()">Reîncepe</button>
+            <button id="butonAdaugaPicatura">Picură 1 ml HCl 0.1 M</button>
+            <button id="butonResetare">Reîncepe</button>
         </div>
 
         <div class="panou-informatii">
             <p><b>Proba:</b> Apă de la robinet (100 ml)</p>
-            <p><b>Volum HCl:</b> <span id="elementTextVolum" style="color: #60a5fa; font-weight: bold;">0</span> ml</p>
+            <p><b>Volum HCl:</b> <span id="elementTextVolum">0</span> ml</p>
             <p><b>Culoare:</b> <span class="text-culoare" id="elementTextCuloare">Galben (Mediu neutru)</span></p>
             <p class="text-duritate" id="elementTextDuritate"></p>
         </div>
     </div>
 
-    <script>
-        let volAdg = 0;
-        const volPctEchiv = 3;
-        const volDepasit = 4;
-
-        const pozStartLichidBiureta = 13.125;
-        const pozStartLichidPahar = 1.5625;
-        let nivCrtLichidBiureta = pozStartLichidBiureta;
-        let nivCrtLichidPahar = pozStartLichidPahar;
-        const unitPerMililitruBiureta = 0.9375;
-        const unitPerMililitruPahar = 0.1875;
-        let animatieInDesfasurare = false;
-
-        const elementPicatura = document.getElementById("elementPicatura");
-        const elementSolutiePahar = document.getElementById("elementSolutiePahar");
-        const elementLichidBiureta = document.getElementById("elementLichidBiureta");
-        const elementTextVolum = document.getElementById("elementTextVolum");
-        const elementTextCuloare = document.getElementById("elementTextCuloare");
-        const elementTextDuritate = document.getElementById("elementTextDuritate");
-        const butonAdaugaPicatura = document.getElementById("butonAdaugaPicatura");
-        const butonResetare = document.getElementById("butonResetare");
-
-        function adaugaPicaturaDinBiureta() {
-            if (animatieInDesfasurare || volAdg >= volDepasit) return;
-
-            animatieInDesfasurare = true;
-            butonAdaugaPicatura.disabled = true;
-
-            nivCrtLichidBiureta -= unitPerMililitruBiureta;
-            elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
-
-            elementPicatura.classList.remove("animatie-cadere");
-            void elementPicatura.offsetWidth;
-            elementPicatura.classList.add("animatie-cadere");
-
-            setTimeout(() => {
-                actualizeazaNivPaharSiVerifPctEchiv();
-
-                animatieInDesfasurare = false;
-                if (volAdg < volDepasit) {
-                    butonAdaugaPicatura.disabled = false;
-                }
-            }, 400);
-        }
-
-        function actualizeazaNivPaharSiVerifPctEchiv() {
-            volAdg += 1;
-
-            nivCrtLichidPahar += unitPerMililitruPahar;
-            elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-
-            elementTextVolum.innerText = volAdg;
-
-            if (volAdg === volPctEchiv) {
-                elementSolutiePahar.style.backgroundColor = "#fb923c";
-                elementTextCuloare.innerText = "Echivalență! Culoare Portocalie";
-                elementTextCuloare.style.color = "#fb923c";
-
-                butonAdaugaPicatura.innerText = "Mai picură 1 ml (Atenție!)";
-                butonAdaugaPicatura.style.backgroundColor = "#eab308";
-
-                let duritate = (2.8 * volAdg).toFixed(1);
-                elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
-                elementTextDuritate.style.display = "block";
-                elementTextDuritate.style.color = "#4ade80";
-
-                butonResetare.style.display = "inline-block";
-            }
-
-            if (volAdg === volDepasit) {
-                elementSolutiePahar.style.backgroundColor = "#ef4444";
-                elementTextCuloare.innerText = "Titrarea este depășită! (Roșu)";
-                elementTextCuloare.style.color = "#ef4444";
-
-                butonAdaugaPicatura.innerText = "Proba compromisă";
-                butonAdaugaPicatura.disabled = true;
-                butonAdaugaPicatura.style.backgroundColor = "#64748b";
-
-                elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
-                elementTextDuritate.style.color = "#ef4444";
-            }
-        }
-
-        function reseteazaTotExperimentul() {
-            volAdg = 0;
-            nivCrtLichidBiureta = pozStartLichidBiureta;
-            nivCrtLichidPahar = pozStartLichidPahar;
-
-            elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
-            elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-            elementSolutiePahar.style.backgroundColor = "#fde047";
-
-            elementTextVolum.innerText = volAdg;
-            elementTextCuloare.innerText = "Galben (Mediu neutru)";
-            elementTextCuloare.style.color = "#fde047";
-
-            elementTextDuritate.style.display = "none";
-
-            butonAdaugaPicatura.innerText = "Picură 1 ml HCl 0.1 M";
-            butonAdaugaPicatura.style.backgroundColor = "#3b82f6";
-            butonAdaugaPicatura.disabled = false;
-            butonResetare.style.display = "none";
-        }
-    </script>
-
 </body>
-
-</html>
