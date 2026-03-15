@@ -39,8 +39,8 @@ document.getElementById("butonPornestePicurare").addEventListener("click", () =>
             if (volAdg < volDepasit) {
                 butonPornestePicurare.disabled = false;
             }
-        }, 400);
-    }, 400);
+        }, 2800);
+    }, 2800);
 });
 
 document.getElementById("butonOprestePicurare").addEventListener("click", () => {
@@ -56,32 +56,34 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
     elementTextVolum.innerText = volAdg;
 
     if (volAdg === volPctEchiv) {
-        elementSolutiePahar.style.backgroundColor = "#fb923c";
+        elementSolutiePahar.style.backgroundColor = "#c55700";
         elementTextCuloare.innerText = "Echivalență! Culoare Portocalie";
-        elementTextCuloare.style.color = "#fb923c";
+        elementTextCuloare.style.color = "#ea9008";
 
         butonPornestePicurare.innerText = "Mai picură 1 ml (Atenție!)";
-        butonPornestePicurare.style.backgroundColor = "#eab308";
+        butonPornestePicurare.style.backgroundColor = "#ea9008";
 
         let duritate = (2.8 * volAdg).toFixed(1);
         elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
         elementTextDuritate.style.display = "block";
         elementTextDuritate.style.color = "#4ade80";
+        document.getElementById("experiment-laborator").style.backgroundColor = "#2a3f2c";
 
         butonResetare.style.display = "inline-block";
     }
 
     if (volAdg === volDepasit) {
-        elementSolutiePahar.style.backgroundColor = "#ef4444";
+        elementSolutiePahar.style.backgroundColor = "#671d0e";
         elementTextCuloare.innerText = "Titrarea este depășită! (Roșu)";
-        elementTextCuloare.style.color = "#ef4444";
+        elementTextCuloare.style.color = "#f6785f";
 
         butonPornestePicurare.innerText = "Proba compromisă";
         butonPornestePicurare.disabled = true;
         butonPornestePicurare.style.backgroundColor = "#64748b";
+        document.getElementById("experiment-laborator").style.backgroundColor = "#2b2b36";
 
         elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
-        elementTextDuritate.style.color = "#ef4444";
+        elementTextDuritate.style.color = "#f6785f";
     }
 }
 
@@ -93,11 +95,11 @@ document.getElementById("butonResetare").addEventListener("click", () => {
 
     elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
     elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-    elementSolutiePahar.style.backgroundColor = "#fde047";
+    elementSolutiePahar.style.backgroundColor = "#f2d32e";
 
     elementTextVolum.innerText = volAdg;
     elementTextCuloare.innerText = "Galben (Mediu neutru)";
-    elementTextCuloare.style.color = "#fde047";
+    elementTextCuloare.style.color = "#f2d32e";
 
     elementTextDuritate.style.display = "none";
 
