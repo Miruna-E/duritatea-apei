@@ -16,27 +16,35 @@ const elementLichidBiureta = document.getElementById("elementLichidBiureta");
 const elementTextVolum = document.getElementById("elementTextVolum");
 const elementTextCuloare = document.getElementById("elementTextCuloare");
 const elementTextDuritate = document.getElementById("elementTextDuritate");
+let picurare = 1;
 
-document.getElementById("butonAdaugaPicatura").addEventListener("click", () => {
-    if (animatieInDesfasurare || volAdg >= volDepasit) return;
+document.getElementById("butonPornestePicurare").addEventListener("click", () => {
+    picurare = 1;
+    setInterval(function(){
+        if (animatieInDesfasurare || volAdg >= volDepasit || picurare == 0) return;
 
-    animatieInDesfasurare = true;
-    butonAdaugaPicatura.disabled = true;
+        animatieInDesfasurare = true;
+        butonPornestePicurare.disabled = true;
 
-    nivCrtLichidBiureta -= unitPerMililitruBiureta;
-    elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
+        nivCrtLichidBiureta -= unitPerMililitruBiureta;
+        elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
 
-    elementPicatura.classList.remove("animatie-cadere");
-    void elementPicatura.offsetWidth;
-    elementPicatura.classList.add("animatie-cadere");
+        elementPicatura.classList.remove("animatie-cadere");
+        void elementPicatura.offsetWidth;
+        elementPicatura.classList.add("animatie-cadere");
 
-    setTimeout(() => {
-        actualizeazaNivPaharSiVerifPctEchiv();
-        animatieInDesfasurare = false;
-        if (volAdg < volDepasit) {
-            butonAdaugaPicatura.disabled = false;
-        }
+        setTimeout(() => {
+            actualizeazaNivPaharSiVerifPctEchiv();
+            animatieInDesfasurare = false;
+            if (volAdg < volDepasit) {
+                butonPornestePicurare.disabled = false;
+            }
+        }, 400);
     }, 400);
+});
+
+document.getElementById("butonOprestePicurare").addEventListener("click", () => {
+    picurare = 0;
 });
 
 function actualizeazaNivPaharSiVerifPctEchiv() {
@@ -52,8 +60,8 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         elementTextCuloare.innerText = "Echivalență! Culoare Portocalie";
         elementTextCuloare.style.color = "#fb923c";
 
-        butonAdaugaPicatura.innerText = "Mai picură 1 ml (Atenție!)";
-        butonAdaugaPicatura.style.backgroundColor = "#eab308";
+        butonPornestePicurare.innerText = "Mai picură 1 ml (Atenție!)";
+        butonPornestePicurare.style.backgroundColor = "#eab308";
 
         let duritate = (2.8 * volAdg).toFixed(1);
         elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
@@ -68,9 +76,9 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         elementTextCuloare.innerText = "Titrarea este depășită! (Roșu)";
         elementTextCuloare.style.color = "#ef4444";
 
-        butonAdaugaPicatura.innerText = "Proba compromisă";
-        butonAdaugaPicatura.disabled = true;
-        butonAdaugaPicatura.style.backgroundColor = "#64748b";
+        butonPornestePicurare.innerText = "Proba compromisă";
+        butonPornestePicurare.disabled = true;
+        butonPornestePicurare.style.backgroundColor = "#64748b";
 
         elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
         elementTextDuritate.style.color = "#ef4444";
@@ -78,6 +86,7 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
 }
 
 document.getElementById("butonResetare").addEventListener("click", () => {
+    picurare = 0;
     volAdg = 0;
     nivCrtLichidBiureta = pozStartLichidBiureta;
     nivCrtLichidPahar = pozStartLichidPahar;
@@ -92,8 +101,8 @@ document.getElementById("butonResetare").addEventListener("click", () => {
 
     elementTextDuritate.style.display = "none";
 
-    butonAdaugaPicatura.innerText = "Picură 1 ml HCl 0.1 M";
-    butonAdaugaPicatura.style.backgroundColor = "#3b82f6";
-    butonAdaugaPicatura.disabled = false;
+    butonPornestePicurare.innerText = "Picură 1 ml HCl 0.1 M";
+    butonPornestePicurare.style.backgroundColor = "#3b82f6";
+    butonPornestePicurare.disabled = false;
     butonResetare.style.display = "none";
 });
