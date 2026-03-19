@@ -39,8 +39,8 @@ document.getElementById("butonPornestePicurare").addEventListener("click", () =>
             if (volAdg < volDepasit) {
                 butonPornestePicurare.disabled = false;
             }
-        }, 2800);
-    }, 2800);
+        }, 400);
+    }, 2000);
 });
 
 document.getElementById("butonOprestePicurare").addEventListener("click", () => {
