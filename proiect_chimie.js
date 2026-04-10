@@ -67,7 +67,7 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
         elementTextDuritate.style.display = "block";
         elementTextDuritate.style.color = "#4ade80";
-        document.getElementById("experiment-laborator").style.backgroundColor = "#2a3f2c";
+        document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 60, 45)";
 
         butonResetare.style.display = "inline-block";
     }
@@ -92,6 +92,7 @@ document.getElementById("butonResetare").addEventListener("click", () => {
     volAdg = 0;
     nivCrtLichidBiureta = pozStartLichidBiureta;
     nivCrtLichidPahar = pozStartLichidPahar;
+    document.getElementById("experiment-laborator").style.backgroundColor = "#2b2b36";
 
     elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
     elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";

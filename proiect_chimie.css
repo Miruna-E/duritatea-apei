@@ -90,7 +90,7 @@ h2 {
 }
 
 #experiment-laborator {
-    /* background-color: #2b2b36; */
+    background-color: #2b2b36;
     padding: 1.875rem 3.75rem;
     border-radius: 0.9375rem;
     box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.8);
@@ -265,67 +265,85 @@ h2 {
     }
 }
 
-/* .pahar_vechi {
-    width: 12.5rem;
-    height: 13.75rem;
-    position: relative;
-    margin-top: 0.3125rem;
-    background-color: rgba(255, 255, 255, 0.05);
-         border: 0.125rem solid  
-    border-top: 70% solid transparent;
-    border-bottom: 70% solid rgba(200, 200, 200, 0.4);;
-    border-radius: 80% 80% 30% 30%;
-    z-index: 5;
-} */
-
-.pahar{
-    position: relative;
-    /* align-items: center;
-    align-content: center; */
+.ansamblu-pahar{
+    position: relative; /*relative=>muta fata de pozitia initiala, centreaza paharul*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 0.3125rem;
+    margin-left: 0.3125rem;
+    margin-right: 0.3125rem;
+    height: 20.30rem;
+    width: 20rem;
+    /* opacity: 5%; */
 }
 
-.cerc_gat_pahar{
-    position: absolute;
-    top: -5%;
-    left: 0;
+/* .ansamblu-pahar.bucata-pahar{
+    opacity: 5%;
+} */
+
+.bucata-pahar{
     background-color: rgba(255, 255, 255, 0.05);
+    border: 0.125rem solid rgba(200, 200, 200, 0.4);
+    position: absolute;
+}
+
+.cerc-gat-pahar{
+    z-index: 15;
+    top: 0;
     width: 4rem;
     height: 2rem;
     border-radius: 50%;
-    z-index: 1;
 }
 
-.gat_pahar {
-	position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.05);
+.gat-pahar {
+    z-index: 10;
+    top: 1rem;
     margin-top: 0rem;
     width: 4rem;
-    height: 6rem;
-    z-index: 2;
+    height: 5.70rem;
+    border-top: none;
+    border-bottom: none;
 }
 
-.baza_pahar{
-    /* position: absolute; */
-    top: 0;
-    left: 0;
-  --r:20px; /* border radius */
-  width: 20rem;
-  aspect-ratio: 1/cos(30deg);
-  --_g:calc(tan(60deg)*var(--r)) bottom var(--r),#000 98%,#0000 101%;
-  -webkit-mask:
+.triunghi-pahar{
+    width: 20rem;
+    background-color: rgba(200, 200, 200, 0.4);
+    opacity: 1; /*ca border*/
+} 
+
+.triunghi-pahar, .triunghi-pahar::before{
+    position: absolute;
+    z-index: 5;
+    top: 3rem;
+    -webkit-mask:
     conic-gradient(from -30deg at 50% calc(200% - 3*var(--r)/2),#000 60deg,#0000 0)
      0 100%/100% calc(100% - 3*var(--r)/2) no-repeat,
     radial-gradient(var(--r) at 50% calc(2*var(--r)),#000 98%,#0000 101%),
     radial-gradient(var(--r) at left  var(--_g)),
     radial-gradient(var(--r) at right var(--_g));
-  clip-path: polygon(50% 0,100% 100%,0 100%);
-  background-color: rgba(255, 255, 255, 0.05);
-  z-index: 3;
+    --r:20px;
+    aspect-ratio: 1/cos(30deg);
+    --_g:calc(tan(60deg)*var(--r)) bottom var(--r),#000 98%,#0000 101%;
+    clip-path: polygon(50% 0,100% 100%,0 100%);
 }
 
-.gradatii-pahar {
+.triunghi-pahar::before{
+    content: '';
+    top: 0.2rem;
+    left: 0.06rem;
+    display: block;
+    width: 19.875rem;
+    background-color: rgba(255, 255, 255, 0.05); 
+
+    /* background-image: -webkit-linear-gradient(transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05)),
+        -webkit-linear-gradient(0deg, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05));
+    */opacity: 0.6; 
+    /* -webkit-transform: rotate(180deg); */
+}
+
+ .gradatii-pahar {
     position: absolute;
     bottom: 0;
     right: 3.4375rem;
@@ -353,7 +371,8 @@ h2 {
 .numar-pahar {
     position: absolute;
     right: 1.75rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgb(255, 255, 255);
+    text-decoration: wavy;
     font-size: 0.75rem;
     font-weight: bold;
     transform: translateY(50%);
