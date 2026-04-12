@@ -1,12 +1,13 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1e1e24;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: #f5f5f5;
-    display: flex;
+    display: flexbox;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(imagini/fundal_apa.jpg);
+    background-position: center;
 }
 
 h2 {
@@ -89,15 +90,82 @@ h2 {
     font-weight: bold;
 }
 
+.centru{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    display: flex;
+    height: fit-content;
+}
+
+nav{
+    background-image: url("imagini/fundal_apa.jpg");
+    background-position: center;
+    padding: 2%;
+    width: 80%;
+    padding: 1.875rem 3.75rem;
+    margin: 0.5rem 1.5rem;
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.625rem 2.5rem #000000cc;
+    text-align: center;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+.menu_option{
+    display: inline-block;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 100;
+    font-size: x-large;
+    text-align: center;
+    color: rgb(102, 204, 184);
+    text-shadow: -1px -1px 0 rgb(13, 78, 65), 1px -1px 0 rgb(13, 78, 65), -1px 1px 0 rgb(13, 78, 65), 1px 1px 0 rgb(13, 78, 65);
+}
+
+.menu_option:hover{
+    color: rgb(23, 147, 137);
+    text-shadow: -1px -1px 0 rgb(17, 69, 65), 1px -1px 0 rgb(17, 69, 65), -1px 1px 0 rgb(17, 69, 65), 1px 1px 0 rgb(17, 69, 65);
+}
+
+header{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    /* position: fixed; */
+}
+
+.main-casuta{
+    display: block;
+    margin-left: 4%;
+    margin-right: 4%;
+    padding-bottom: 6%;
+}
+
 #experiment-laborator {
+    min-width: max-content;
+    max-width: 60%;
     background-color: #2b2b36;
     padding: 1.875rem 3.75rem;
+    margin: 1.875rem 3.75rem;
+    margin-top: 0;
     border-radius: 0.9375rem;
     box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.8);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#lucrare-laborator-pdf{
+    height: 40rem;
+    width: 60rem;
+    border: none;
+    margin: 0.3rem;
+    margin-left: 2rem;
+    align-self: self-start;
 }
 
 .ansamblu-biureta {
@@ -363,7 +431,7 @@ h2 {
     right: 0;
     width: 1.25rem;
     height: 0.125rem;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgb(17, 17, 17);
 }
 
 .linie-mica-gradatie-pahar {
@@ -371,18 +439,26 @@ h2 {
     right: 0;
     width: 0.625rem;
     height: 0.0625rem;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgb(17, 17, 17);
 }
 
 .numar-pahar {
     position: absolute;
     right: 1.75rem;
-    color: rgb(255, 255, 255);
-    text-decoration: wavy;
-    font-size: 0.75rem;
+    color: rgb(17, 17, 17);
+    font-size: 1.15rem;
     font-weight: bold;
     transform: translateY(50%);
     text-align: right;
+    text-shadow:
+        -0.5px -0.5px 0 #d6d6d3,
+         0.5px -0.5px 0 #d6d6d3,
+        -0.5px  0.5px 0 #d6d6d3,
+         0.5px  0.5px 0 #d6d6d3,
+         0   -0.5px 0 #d6d6d3,
+         0    0.5px 0 #d6d6d3,
+        -0.5px  0   0 #d6d6d3,
+         0.5px  0   0 #d6d6d3;
 }
 
 .lichid-pahar {
@@ -471,4 +547,26 @@ button {
     margin-top: 0.625rem;
     border-top: 0.0625rem solid #555;
     padding-top: 0.625rem;
+}
+
+#text-mod-lucru {
+    font-size: 1.2rem;
+}
+
+li{
+    text-align: left;
+}
+
+b{
+    color: #88da7d;
+}
+
+.casuta-observatie{
+    border: 0.125rem solid #f9f871;
+    padding: 0.5rem;
+    background-color: rgba(32, 31, 31, 0.5);
+}
+
+.observatie{
+    color: #f9f871;
 }
