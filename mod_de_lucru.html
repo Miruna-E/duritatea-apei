@@ -14,16 +14,18 @@
         <nav>
             <a class="menu_option" href="simulator.html" target="_self">SIMULATOR</a>
             <a class="menu_option" href="" target="_self">MOD DE LUCRU</a>
+            <a class="menu_option" href="teorie.html" target="_self">TEORIE</a>
         </nav>
         </div>
         <h1 class="centru">Duritatea apei</h1>
         <h2 class="centru">Mod de lucru</h2>
     </header>
 
-    <main class="centru" >
+    <main  class="main-casuta" >
+        <div class="centru">
         <iframe id="lucrare-laborator-pdf" src="lucrare_laborator.pdf"></iframe>
 
-        <div class="main-casuta" id="text-mod-lucru">
+        <div class="text-informatii">
             <h3>Titrare cu HCl 0,1 M în prezența indicatorului metil oranj</h3>
             <ol>
                 <li>Se măsoară cu ajutorul unui cilindru gradat <b>100mL de apă</b> de la robinet și se introduce într-un flacon conic Erlenmeyer.</li>
@@ -56,34 +58,74 @@
                 Volumul total de titrant adăugat trebuie să fie cel puțin (a+1)mL.
             </div>
             </div>
-
-            <!-- o sa fac tabelul sa arate mai bine maine -->
-            <table border="1">
-                <tr>
-                    <th>Volumul de titrant (mL)</th>
-                    <th>0</th>
-                    <th>0,2</th>
-                    <th>0,4</th>
-                    <th>0,6</th>
-                    <th>0,8</th>
-                    <th>1</th>
-                    <th>1,2</th>
-                    <th>...</th>
-                    <th>(a + 1)</th>
-                </tr>
-                <tr>
-                    <th>Conductivitate (&mu;S*cm<sup>-1</sup>)</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </table>            
+        </div>
+        </div>
+        <table id="tabel-conductometrica">
+            <caption>Tabel folosit pentru prelucrarea datelor experimentale</caption>
+            <tbody>
+            <tr>
+                <th scope="row">Volumul de titrant (mL)</th>
+                <td>0</td>
+                <td>0,2</td>
+                <td>0,4</td>
+                <td>0,6</td>
+                <td>0,8</td>
+                <td>1</td>
+                <td>1,2</td>
+                <td>1,4</td>
+                <td>1,6</td>
+            </tr>
+            <tr>
+                <th scope="row">Conductivitate (&mu;S&#8901;cm<sup>-1</sup>)</th>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text"></td>
+            </tr>
+            </tbody>
+        </table>            
+        <p class="centru text-informatii"><b>Poți introduce datele în tabelul de mai sus!</b></p>
+        
+        <br>
+        <h2 class="centru">Calcule și rezultate</h2>
+        <div class="text-informatii">
+            &emsp;Se compară rezultatele obținute prin cele două metode. Se calculează <b>duritatea în grade germane a probei de apă de la robinet</b>.
+            <b>Cantitatea de HCl folosită la titrare este convertită în cantitate de CaO</b>, pe baza reacției chimice:
+            <div class="formule-chimice">
+                <br>2HCl + CaO &#8594; CaCl<sub>2</sub> + 2H<sub>2</sub>O
+            </div>
+            <br>Prin urmare:
+            <div class="calcule">
+            <br>2 moli HCl (2&#8901;36,5 g) reacționează cu 1 mol CaO (40+16)
+            </div>
+            <br>Rezultă:
+            <div class="calcule">
+            <br>la 3,65 mg HCl corespund......................2,8 mg CaO
+            <br>O soluție HCl 0,1 M: în 1000 mL soluție există 0,1 moli HCl = 0,1&#8901;36,5 g HCl 
+            <br>sau<br>1mL soluție......................0,1&#8901;36,5/1000 = 3,65 mg 2HCl
+            </div>
+            <br>Rezultă:
+            <div class="calcule">
+            <br>1 mL sol. HCl reacționează cu......................2,8 mg CaO
+            <br>a mL sol. HCl reacționează cu......................2,8&#8901;a mg CaO
+            </div>
+            <br>Cantitatea de <b>2,8&#8901;a mg CaO reprezintă conținutul de săruri solubile de calciu și magneziu din proba de 100 mL de apă de la robinet</b>.
+            <br><b>Definiția gradului de duritate german: 1&#176;dH = 10 mg CaO/L apă</b>
+            <div class="calcule">
+            <br>Pentru 10 mg CaO în 1000 mL apă corespunde 1&#176;dH
+            <br>Pentru 2,8&#8901;a&#8901;10 mg CaO în 1000 mL apă corespunde 2,8&#8901;a&#176;dH
+            </div>
+            <br>
+            <div class="casuta-observatie">
+            <div class="observatie">
+                Deci: d<sub>tp</sub>= 2,8&#8901;a&#176;dH
+            </div>
+            </div>
         </div>
     </main>
 </body>
