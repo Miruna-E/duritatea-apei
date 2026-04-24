@@ -1,3 +1,4 @@
+if (window.location.pathname=="simulator.html") {
 let volAdg = 0;
 const volPctEchiv = 3;
 const volDepasit = 4;
@@ -86,26 +87,59 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         elementTextDuritate.style.color = "#f6785f";
     }
 }
+}
 
-document.getElementById("butonResetare").addEventListener("click", () => {
-    picurare = 0;
-    volAdg = 0;
-    nivCrtLichidBiureta = pozStartLichidBiureta;
-    nivCrtLichidPahar = pozStartLichidPahar;
-    document.getElementById("experiment-laborator").style.backgroundColor = "#2b2b36";
+// } else if (window.location.pathname=="mod_de_lucru.html") {
+// }
 
-    elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
-    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-    elementSolutiePahar.style.backgroundColor = "#f2d32e";
+document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("click", () => {
+    
+    let a = document.getElementById("volumEchivalenta").value;
+    localStorage.setItem("volumEchivalenta", a);
 
-    elementTextVolum.innerText = volAdg;
-    elementTextCuloare.innerText = "Galben (Mediu neutru)";
-    elementTextCuloare.style.color = "#f2d32e";
+    // //schimba ptr setAttribute
+    // for (let i = volumTabel.length - 1; i > 0; i--) { //prea multe coloane
+    //     if(volumTabel[i].textContent > a + 1 && volumTabel[i-1].textContent > a + 1){
+    //         volumTabel[i].parentNode.removeChild(volumTabel[i]);
+    //         inputTabel[i].parentNode.removeChild(inputTabel[i]);
+    //     } else if(volumTabel[i].textContent > a + 1 && volumTabel[i-1].textContent > a + 1){ //prea putine coloane
+    //         // <td><label for="conductivitate1,6">1,6</label></td>;
+    //         let volumTabelNou = new document.createElement("td");
+    //         let volumTabelNouLabel = volumTabelNou.appendChild(document.createElement("label"));
+    //         volumTabelNouLabel.textContent = Number(volumTabel.lastChild.value) + 0.2;
+    //         let volumTabelNouLabelFor = volumTabelNouLabel.getAttributeNode("for");
+    //         volumTabelNouLabelFor.textContent = "conductivitate" + volumTabelNouLabel.textContent;
+    //         volumTabelNouLabel.setAttributeNode(volumTabelNouLabelFor);
+    //         volumTabel[i].parentNode.appendChild(volumTabelNou);
 
-    elementTextDuritate.style.display = "none";
+    //         //  <td><input class="input-tabel" type="text" id="conductivitate0" name="conductivitate0"></td>
+    //         let inputTabelNou = new document.createElement("td");
+    //         let inputTabelNou = inputTabelNou.appendChild(document.createElement("input"));
+    //         inputTabelNou.
+    //         inputTabel[i].parentNode.appendChild(inputTabelNou);
+    //     }
+    // }
 
-    butonPornestePicurare.innerText = "Picură 1 ml HCl 0.1 M";
-    butonPornestePicurare.style.backgroundColor = "#3b82f6";
-    butonPornestePicurare.disabled = false;
-    butonResetare.style.display = "none";
+    // console.log(volumTabel);
+    // while(a + 1 > valoriTabel[valoriTabel.length - 1]){
+        
+    // }
 });
+
+document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
+    let volumTabel = document.getElementsByTagName("label");
+    let inputTabel = document.getElementsByClassName("input-tabel");
+    let valoriTabel = {};
+    for (let i = 0; i < inputTabel.length; i++) {
+        if(inputTabel[i].value != Number(inputTabel[i].value)){
+            alert("Introduceti doar numere in tabel!");
+            const error = new TypeError(`Tabelul contine date care nu sunt numere in coloana ${i}.`)
+            console.error(error);
+            return;
+        }
+        valoriTabel[i] = inputTabel[i].value;
+    }
+    localStorage.setItem("", a); //vezi ce pui
+});
+
+// window.addEventListener("load", modificaTabel);

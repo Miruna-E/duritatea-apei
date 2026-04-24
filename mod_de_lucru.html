@@ -23,7 +23,7 @@
 
     <main  class="main-casuta" >
         <div class="centru">
-        <iframe id="lucrare-laborator-pdf" src="lucrare_laborator.pdf"></iframe>
+        <iframe src="lucrare_laborator.pdf" id="lucrare-laborator-pdf" name="lucrare-laborator-pdf"></iframe>
 
         <div class="text-informatii">
             <h3>Titrare cu HCl 0,1 M în prezența indicatorului metil oranj</h3>
@@ -60,38 +60,62 @@
             </div>
         </div>
         </div>
+
+        <form>
+        <br><br>
+        <form>
+        <p class="centru text-informatii"><b>Scrie valoarea lui <i>a</i> mai jos pentru a modifica numărul de coloane din tabel.</b></p>
+        <p class="centru text-informatii"><b>
+            <label for="volumEchivalenta">a</label> = <input type="text" id="volumEchivalenta" name="volumEchivalenta">
+            <div class="centru">
+                <input type="button" class="butonFormular" id="butonTrimitereVolumEchivalenta" name="butonTrimitereVolumEchivalenta" value="Am scris corect a">
+                <label for="butonTrimitereVolumEchivalenta"></label>
+                <input type="reset" class="butonFormular" id="butonResetareVolumEchivalenta" name="butonResetareVolumEchivalenta" value="Sterge a">
+                <label for="butonResetareVolumEchivalenta"></label>
+            </div>
+        </b></p>
+        </form>
+
+        <form>
         <table id="tabel-conductometrica">
             <caption>Tabel folosit pentru prelucrarea datelor experimentale</caption>
             <tbody>
             <tr>
                 <th scope="row">Volumul de titrant (mL)</th>
-                <td>0</td>
-                <td>0,2</td>
-                <td>0,4</td>
-                <td>0,6</td>
-                <td>0,8</td>
-                <td>1</td>
-                <td>1,2</td>
-                <td>1,4</td>
-                <td>1,6</td>
+                <td><label for="conductivitate0">0</label></td>
+                <td><label for="conductivitate0,2">0,2</label></td>
+                <td><label for="conductivitate0,4">0,4</label></td>
+                <td><label for="conductivitate0,6">0,6</label></td>
+                <td><label for="conductivitate0,8">0,8</label></td>
+                <td><label for="conductivitate1">1</label></td>
+                <td><label for="conductivitate1,2">1,2</label></td>
+                <td><label for="conductivitate1,4">1,4</label></td>
+                <td><label for="conductivitate1,6">1,6</label></td>
             </tr>
             <tr>
                 <th scope="row">Conductivitate (&mu;S&#8901;cm<sup>-1</sup>)</th>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
-                <td><input class="input-tabel" type="text"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0" name="conductivitate0"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0,2" name="conductivitate0,2"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0,4" name="conductivitate0,4"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0,6" name="conductivitate0,6"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0,8" name="conductivitate0,8"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1" name="conductivitate1"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1,2" name="conductivitate1,2"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1,4" name="conductivitate1,4"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1,6" name="conductivitate1,6"></td>
             </tr>
             </tbody>
         </table>            
         <p class="centru text-informatii"><b>Poți introduce datele în tabelul de mai sus!</b></p>
+        <div class="centru">
+            <input type="button" class="butonFormular" id="butonTrimitereTabel" name="butonTrimitereTabel" value="Am completat tabelul">
+            <label for="butonTrimitereTabel"></label>
+            <input type="reset" class="butonFormular" id="butonResetareTabel" name="butonResetareTabel" value="Sterge datele din tabel">
+            <label for="butonResetareTabel"></label>
+        </div>
+        </form>
         
-        <br>
+        <br><br><br>
         <h2 class="centru">Calcule și rezultate</h2>
         <div class="text-informatii">
             &emsp;Se compară rezultatele obținute prin cele două metode. Se calculează <b>duritatea în grade germane a probei de apă de la robinet</b>.

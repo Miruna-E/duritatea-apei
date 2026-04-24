@@ -481,7 +481,7 @@ header{
     z-index: 100;
 }
 
-button {
+button, .butonFormular {
     color: white;
     border: none;
     padding: 0.875rem 1.75rem;
@@ -493,8 +493,14 @@ button {
     box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.2);
 }
 
-#butonPornestePicurare, #butonOprestePicurare {
+#butonPornestePicurare, #butonOprestePicurare{
     background-color: #3b82f6;
+}
+
+.butonFormular{
+    background-color: #88da7d;
+    color: #0f2e4e;
+    margin: 0.4rem;
 }
 
 #butonPornestePicurare:hover, #butonOprestePicurare:hover{
@@ -502,7 +508,12 @@ button {
     transform: translateY(-0.125rem);
 }
 
-#butonPornestePicurare:disabled, #butonOprestePicurare:disabled {
+.butonFormular:hover{
+    background-color: #f9f871;
+    transform: translateY(-0.125rem);
+}
+
+#butonPornestePicurare:disabled, #butonOprestePicurare:disabled, .butonFormular:disabled {
     background-color: #64748b;
     cursor: not-allowed;
     transform: none;
@@ -608,7 +619,7 @@ caption{
     font-size: 1.2rem;
 }
 
-.input-tabel{
+.input-tabel, #volumEchivalenta{
     width: 3rem;
     background-color: transparent;
     border-color: rgba(32, 31, 31, 0.5);
