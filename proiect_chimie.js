@@ -153,8 +153,8 @@ document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("clic
     for (let i = volumTabel.length - 1; Number(volumTabel[i].dataset.nrvolum) < (a + 1) && i > 0; i = volumTabel.length - 1) { //adauga casute in tabel
         let casutaVolumTabelNou = document.createElement("td");
         let casutaVolumTabelNouLabel = document.createElement("label");
-        let valoareVolumTabelNou = ((Number(volumTabel[i].dataset.nrvolum) + volumeAlaturateDiferenta) * 100)/100;
-        // casutaVolumTabelNouLabel.setAttribute("data-nrvolum", String(Number(volumTabel[i].dataset.nrvolum) + volumeAlaturateDiferenta));
+        let valoareVolumTabelNou = Math.round((Number(volumTabel[i].dataset.nrvolum) + volumeAlaturateDiferenta) * 100)/100;
+        casutaVolumTabelNouLabel.setAttribute("data-nrvolum", String(Number(volumTabel[i].dataset.nrvolum) + volumeAlaturateDiferenta));
         casutaVolumTabelNouLabel.setAttribute("data-nrvolum", String(valoareVolumTabelNou));
         casutaVolumTabelNouLabel.setAttribute("for", "conductivitate" + casutaVolumTabelNouLabel.getAttribute("data-nrvolum"));
         casutaVolumTabelNouLabel.textContent = casutaVolumTabelNouLabel.dataset.nrvolum;
