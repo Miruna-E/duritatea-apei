@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="proiect_chimie.css">
     <script src="proiect_chimie.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
     <title>Simulator de laborator: Duritatea Apei</title>
 </head>
 
@@ -94,15 +95,15 @@
             </tr>
             <tr>
                 <th scope="row">Conductivitate (&mu;S&#8901;cm<sup>-1</sup>)</th>
-                <td><input class="input-tabel" type="text" id="conductivitate0" name="conductivitate0"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate0.2" name="conductivitate0.2"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate0.4" name="conductivitate0.4"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate0.6" name="conductivitate0.6"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate0.8" name="conductivitate0.8"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate1" name="conductivitate1"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate1.2" name="conductivitate1.2"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate1.4" name="conductivitate1.4"></td>
-                <td><input class="input-tabel" type="text" id="conductivitate1.6" name="conductivitate1.6"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0" name="conductivitate0" value="0"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.2" name="conductivitate0.2" value="0.2"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.4" name="conductivitate0.4" value="0.4"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.6" name="conductivitate0.6" value="0.6"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.8" name="conductivitate0.8" value="0.8"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1" name="conductivitate1" value="1"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1.2" name="conductivitate1.2" value="1.2"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1.4" name="conductivitate1.4" value="1.4"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1.6" name="conductivitate1.6" value="1.6"></td>
             </tr>
             </tbody>
         </table>            
@@ -114,8 +115,15 @@
             <label for="butonResetareTabel"></label>
         </div>
         </form>
+
+        <br><br>
+        <div class="centru text-informatii" id="mesaj-grafic"><b>Completează tabelul pentru a vedea graficul!</b></div>
+        <div id="loc-grafic" style="display: none;">
+            <canvas id="graficConductometrica" style="width: 100%; max-height: 600px"></canvas>
+        </div>
+        <br><br>
         
-        <br><br><br>
+        <br><br>
         <h2 class="centru">Calcule și rezultate</h2>
         <div class="text-informatii">
             &emsp;Se compară rezultatele obținute prin cele două metode. Se calculează <b>duritatea în grade germane a probei de apă de la robinet</b>.

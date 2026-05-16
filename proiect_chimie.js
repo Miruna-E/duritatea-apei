@@ -113,8 +113,14 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
 }
 
 if (window.location.pathname=="/mod_de_lucru.html") {
-
 let volumeAlaturateDiferenta = 0.2;
+let nrVolumTabel = [];
+
+let volumTabel = document.getElementById("tabel-conductometrica").getElementsByTagName("label"); 
+for(let i = 0; i < volumTabel.length; i++){
+    nrVolumTabel[i] = Number(volumTabel[i].dataset.nrvolum);
+}
+localStorage.setItem("nrVolumTabel", nrVolumTabel);
 
 document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("click", () => {
     //=> ultimul volum din tabel este a+1 sau primul multiplu de 0.2 > a+1
@@ -140,10 +146,8 @@ document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("clic
 
     let randVolumTabel = document.getElementsByTagName("tr")[0];
     let randInputTabel = document.getElementsByTagName("tr")[1];
-
     let inputTabel = document.getElementsByClassName("input-tabel"); //cu tag <input>
-    let volumTabel = document.getElementById("tabel-conductometrica").getElementsByTagName("label"); 
-    
+
     for (let i = volumTabel.length - 1; Number(volumTabel[i].dataset.nrvolum) > (a + 1) && Number(volumTabel[i-1].dataset.nrvolum >= (a + 1)) && i > 0; i--) { //sterge casute din tabel
         volumTabel[i].parentNode.removeChild(volumTabel[i]);
         inputTabel[i].parentNode.removeChild(inputTabel[i]);
@@ -161,7 +165,6 @@ document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("clic
         casutaVolumTabelNouLabel.textContent = casutaVolumTabelNouLabel.textContent.replace(".", ","); //initial cu "." pentru a converti usor din string in number
 
         casutaVolumTabelNou.appendChild(casutaVolumTabelNouLabel);
-        console.log(casutaVolumTabelNou);
         randVolumTabel.appendChild(casutaVolumTabelNou);
 
         let casutaInputTabelNou = document.createElement("td");
@@ -172,12 +175,20 @@ document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("clic
         casutaInputTabelNouInput.setAttribute("name", casutaInputTabelNouInput.getAttribute("id"));
 
         casutaInputTabelNou.appendChild(casutaInputTabelNouInput);
-        console.log(casutaInputTabelNou);
         randInputTabel.appendChild(casutaInputTabelNou);
     }
+
+    //se schimba volumTabel => schimb si nrVolumTabel
+    volumTabel = document.getElementById("tabel-conductometrica").getElementsByTagName("label"); 
+    for(let i = 0; i < volumTabel.length; i++){
+        nrVolumTabel[i] = Number(volumTabel[i].dataset.nrvolum);
+    }
+    localStorage.setItem("nrVolumTabel", nrVolumTabel);
 });
 
 document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
+    document.getElementById("mesaj-grafic").style.display = "none";
+    document.getElementById("loc-grafic").style.display = "block";
     let inputTabel = document.getElementsByClassName("input-tabel");
     let valoriTabel = {};
     for (let i = 0; i < inputTabel.length; i++) {
@@ -190,11 +201,62 @@ document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
         valoriTabel[i] = Number(inputTabel[i].value);
     }
     localStorage.setItem("dateTabelConductometricaString", JSON.stringify(valoriTabel)); //array stocat ca string pentru a folosi un singur spatiu de memorie
+    let dateTabelConductometricaString = localStorage.getItem("dateTabelConductometricaString");
+    let dateTabelConductometrica = JSON.parse(dateTabelConductometricaString);
+    dateTabelConductometrica = Object.values(dateTabelConductometrica);
+
+    const graficConductometrica = new Chart("graficConductometrica", {
+        type: "line",
+        data: {
+            labels: nrVolumTabel,
+            datasets: [{
+                label: "Dependența conductivitate specifică în funcție de volumul titrant",
+                backgroundColor: "rgb(0, 134, 146)",
+                borderColor: "rgb(0, 134, 146)",
+                pointBackgroundColor: "rgb(253, 224, 71)",
+                pointBorderColor: "rgb(232, 200, 40)",
+                borderWidth: 1.4,
+                data: dateTabelConductometrica
+            }],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "rgb(245, 245, 245)",
+                        font: {
+                            size: 16,
+                        }
+                    }
+                }
+            },
+            scales: { //axele Ox, Oy
+                x: {
+                    grid: {
+                        color: "rgba(0, 87, 122, 0.4)",
+                    },
+                    ticks: { //scrisul de langa axe
+                        color: "rgb(245, 245, 245)",
+                        font: {
+                            size: 16,
+                        },
+                        beginAtZero: true,
+                    }
+                },
+                y: {
+                    grid: {
+                        color: "rgba(0, 87, 122, 0.4)",
+                    },
+                    ticks: {
+                        color: "rgb(245, 245, 245)",
+                        font: {
+                            size: 16,
+                        },
+                        beginAtZero: true,
+                    }
+                }
+            }
+        },
+    });
 });
 }
-
-//o sa folosesc randurile de mai jos ca sa fac graficul
-// console.log(localStorage.getItem("volumEchivalenta"));
-// let dateTabelConductometricaString = localStorage.getItem("dateTabelConductometricaString");
-// let dateTabelConductometrica = JSON.parse(dateTabelConductometricaString);
-// console.log(dateTabelConductometrica);
