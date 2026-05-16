@@ -363,16 +363,20 @@ header{
     height: 2rem;
     border-radius: 50%;
     border: 0.125rem solid rgba(200, 200, 200, 0.4);
+    background-color: transparent;
 }
 
 .gat-pahar {
     z-index: 10;
-    top: 1rem;
+    top: 0;
     margin-top: 0rem;
     width: 4rem;
-    height: 5.70rem;
+    height: 6.48rem;
     border-top: none;
     border-bottom: none;
+    /*curbarea marginilor de sus*/
+    border-top-left-radius: 50% 1rem; 
+    border-top-right-radius: 50% 1rem;
 }
 
 .triunghi-pahar{
@@ -400,21 +404,11 @@ header{
     --r:20px;
     aspect-ratio: 1/cos(30deg);
     --_g:calc(tan(60deg)*var(--r)) bottom var(--r),rgb(0, 0, 0) 98%,rgba(0, 0, 0, 0) 101%;
-    clip-path: polygon(50% 0,100% 100%,0 100%);
+    clip-path: polygon(40% 3.5rem, 60% 3.5rem, 100% 100%, 0 100%);
 }
 
 .triunghi-pahar::before{
-    content: '';
-    top: 0.2rem;
-    left: 0.06rem;
-    display: block;
-    width: 19.875rem;
-    background-color: rgba(255, 255, 255, 0.05); 
-
-    /* background-image: -webkit-linear-gradient(transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05)),
-        -webkit-linear-gradient(0deg, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05));
-    */opacity: 0.6; 
-    /* -webkit-transform: rotate(180deg); */
+    display: none; /* scapam de dublarea opacității (gâtul și corpul au acum 5% amândouă) */
 }
 
  .gradatii-pahar {
