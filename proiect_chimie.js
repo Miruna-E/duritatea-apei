@@ -1,13 +1,15 @@
 if (window.location.pathname=="/simulator.html") {
 let volAdg = 0;
-const volPctEchiv = 3;
-const volDepasit = 4;
+let volPctEchiv = 3;
+let volDepasit = 4;
+let tipApaCurenta = "robinet";
+let incrementVolum = 1;
 
-const pozStartLichidBiureta = 13.125;
+const pozStartLichidBiureta = 32.75;
 const pozStartLichidPahar = 1.5625;
 let nivCrtLichidBiureta = pozStartLichidBiureta;
 let nivCrtLichidPahar = pozStartLichidPahar;
-const unitPerMililitruBiureta = 0.9375;
+const unitPerMililitruBiureta = 3.0;
 const unitPerMililitruPahar = 0.1875;
 let animatieInDesfasurare = false;
 
@@ -17,8 +19,55 @@ const elementLichidBiureta = document.getElementById("elementLichidBiureta");
 const elementTextVolum = document.getElementById("elementTextVolum");
 const textCuloareSolutiePahar = document.getElementById("textCuloareSolutiePahar");
 const elementTextDuritate = document.getElementById("elementTextDuritate");
+const butonSchimbaApa = document.getElementById("butonSchimbaApa");
+const numeProbaText = document.getElementById("numeProbaText");
+const butonPornestePicurare = document.getElementById("butonPornestePicurare");
+
 let picurare = 1;
 let intervalPicurare;
+
+function resetareSimulare() {
+    picurare = 0;
+    clearInterval(intervalPicurare);
+    volAdg = 0;
+    nivCrtLichidBiureta = pozStartLichidBiureta;
+    nivCrtLichidPahar = pozStartLichidPahar;
+
+    elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
+    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
+    elementSolutiePahar.style.backgroundColor = "rgb(242, 211, 46)";
+
+    elementTextVolum.innerText = volAdg.toFixed(1);
+    textCuloareSolutiePahar.innerText = "Galben (Mediu neutru)";
+    textCuloareSolutiePahar.style.color = "rgb(242, 211, 46)";
+
+    elementTextDuritate.style.display = "none";
+    document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
+
+    butonPornestePicurare.innerText = tipApaCurenta === "robinet" ? "Picură câte 1 ml HCl 0.1 M" : "Picură câte 0.1 ml HCl 0.1 M";
+    butonPornestePicurare.style.backgroundColor = "rgb(59, 130, 246)";
+    butonPornestePicurare.disabled = false;
+    document.getElementById("butonResetare").style.display = "none";
+}
+
+butonSchimbaApa.addEventListener("click", () => {
+    if (tipApaCurenta === "robinet") {
+        tipApaCurenta = "distilata";
+        volPctEchiv = 0.3;
+        volDepasit = 0.4;
+        incrementVolum = 0.1;
+        numeProbaText.innerText = "Apă distilată (100 ml)";
+        butonSchimbaApa.innerText = "Schimbă: Apă de la robinet";
+    } else {
+        tipApaCurenta = "robinet";
+        volPctEchiv = 3;
+        volDepasit = 4;
+        incrementVolum = 1;
+        numeProbaText.innerText = "Apă de la robinet (100 ml)";
+        butonSchimbaApa.innerText = "Schimbă: Apă distilată";
+    }
+    resetareSimulare();
+});
 
 document.getElementById("butonPornestePicurare").addEventListener("click", () => {
     picurare = 1;
@@ -29,8 +78,14 @@ document.getElementById("butonPornestePicurare").addEventListener("click", () =>
         animatieInDesfasurare = true;
         butonPornestePicurare.disabled = true;
 
-        nivCrtLichidBiureta -= unitPerMililitruBiureta;
+        nivCrtLichidBiureta -= (unitPerMililitruBiureta * incrementVolum);
         elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
+
+        if (tipApaCurenta === "robinet") {
+            elementPicatura.classList.add("forma-jet");
+        } else {
+            elementPicatura.classList.remove("forma-jet");
+        }
 
         elementPicatura.classList.remove("animatie-cadere");
         void elementPicatura.offsetWidth;
@@ -53,56 +108,35 @@ document.getElementById("butonOprestePicurare").addEventListener("click", () => 
     clearInterval(intervalPicurare);
 });
 
-document.getElementById("butonResetare").addEventListener("click", () => {
-    picurare = 0;
-    clearInterval(intervalPicurare);
-    volAdg = 0;
-    nivCrtLichidBiureta = pozStartLichidBiureta;
-    nivCrtLichidPahar = pozStartLichidPahar;
-
-    elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
-    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-    elementSolutiePahar.style.backgroundColor = "rgb(242, 211, 46)";
-
-    elementTextVolum.innerText = volAdg;
-    textCuloareSolutiePahar.innerText = "Galben (Mediu neutru)";
-    textCuloareSolutiePahar.style.color = "rgb(242, 211, 46)";
-
-    elementTextDuritate.style.display = "none";
-    document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
-
-    butonPornestePicurare.innerText = "Picură 1 ml HCl 0.1 M";
-    butonPornestePicurare.style.backgroundColor = "rgb(59, 130, 246)";
-    butonPornestePicurare.disabled = false;
-    butonResetare.style.display = "none";
-});
+document.getElementById("butonResetare").addEventListener("click", resetareSimulare);
 
 function actualizeazaNivPaharSiVerifPctEchiv() {
-    volAdg += 1;
+    volAdg = Math.round((volAdg + incrementVolum) * 10) / 10;
 
-    nivCrtLichidPahar += unitPerMililitruPahar;
+    nivCrtLichidPahar += (unitPerMililitruPahar * incrementVolum);
     elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
 
-    elementTextVolum.innerText = volAdg;
+    elementTextVolum.innerText = volAdg.toFixed(1);
 
     if (volAdg === volPctEchiv) {
         elementSolutiePahar.style.backgroundColor = "rgb(197, 87, 0)";
         textCuloareSolutiePahar.innerText = "Echivalență! Culoare Portocalie";
         textCuloareSolutiePahar.style.color = "rgb(234, 144, 8)";
 
-        butonPornestePicurare.innerText = "Mai picură 1 ml (Atenție!)";
+        butonPornestePicurare.innerText = tipApaCurenta === "robinet" ? "Mai adaugă 1 ml (Atenție!)" : "Mai picură 0.1 ml (Atenție!)";
         butonPornestePicurare.style.backgroundColor = "rgb(234, 144, 8)";
 
-        let duritate = (2.8 * volAdg).toFixed(1);
+        let duritate = (2.8 * volAdg).toFixed(2);
         elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
+        
         elementTextDuritate.style.display = "block";
         elementTextDuritate.style.color = "rgb(136, 218, 125)";
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 60, 45)";
 
-        butonResetare.style.display = "inline-block";
+        document.getElementById("butonResetare").style.display = "inline-block";
     }
 
-    if (volAdg === volDepasit) {
+    if (volAdg >= volDepasit) {
         elementSolutiePahar.style.backgroundColor = "rgb(103, 29, 14)";
         textCuloareSolutiePahar.innerText = "Titrarea este depășită! (Roșu)";
         textCuloareSolutiePahar.style.color = "rgb(246, 120, 95)";
@@ -112,9 +146,17 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         butonPornestePicurare.style.backgroundColor = "rgb(100, 116, 139)";
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
-        elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
+        if (tipApaCurenta === "distilata") {
+            elementTextDuritate.innerHTML = `Eroare: Pentru apa distilată, lipsită de capacitate de tamponare, punctul de echivalență este atins la aprox. 0.3 ml HCl. Adăugarea a 1 ml dintr-o dată a compromis proba!`;
+        } else {
+            elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
+        }
+        
+        elementTextDuritate.style.display = "block";
         elementTextDuritate.style.color = "rgb(246, 120, 95)";
         clearInterval(intervalPicurare);
+        
+        document.getElementById("butonResetare").style.display = "inline-block";
     }
 }
 }
