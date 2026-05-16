@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="proiect_chimie.css">
+    <script src="proiect_chimie.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+    <title>Simulator de laborator: Duritatea Apei</title>
+</head>
+
+<body>
+    <header>
+        <div class="centru">
+        <nav>
+            <a class="menu_option" href="simulator.html" target="_self">SIMULATOR</a>
+            <a class="menu_option" href="" target="_self">MOD DE LUCRU</a>
+            <a class="menu_option" href="teorie.html" target="_self">TEORIE</a>
+        </nav>
+        </div>
+        <h1 class="centru">Duritatea apei</h1>
+        <h2 class="centru">Mod de lucru</h2>
+    </header>
+
+    <main  class="main-casuta" >
+        <div class="centru">
+        <iframe src="lucrare_laborator.pdf" id="lucrare-laborator-pdf" name="lucrare-laborator-pdf"></iframe>
+
+        <div class="text-informatii">
+            <h3>Titrare cu HCl 0,1 M în prezența indicatorului metil oranj</h3>
+            <ol>
+                <li>Se măsoară cu ajutorul unui cilindru gradat <b>100mL de apă</b> de la robinet și se introduce într-un flacon conic Erlenmeyer.</li>
+                <li>Se adaugă <b>3-4 picături de indicator, cu ajutorul sticluței picurătoare</b>, având grijă ca cele două fante de pe gâtul sticluței și al dopului să se suprapună.</li>
+                <li>Se citește <b>volumul inițial (V<sub>i</sub>) de HCl 0,1 M</b> din biuretă.</li>
+                <li>Se începe titrarea adăugând sub <b>agitare permanentă, picătură cu picătură, soluție de acid</b>, până în momentul virării culorii indicatorului, moment în care se ajunge la punctul de echivalență și se încheie reacția de neutralizare.</li>
+                <li>Se citește <b>volumul final (V<sub>f</sub>) de HCl 0,1 M</b> din biuretă. <b>Volumul folosit: a = V<sub>f</sub> - V<sub>i</sub></b> (mL HCl 0,1 M).</li>
+                <li>Se <b>repetă</b> determinarea de către fiecare student din echipa de lucru.</li>
+                <li>Se calculează <b>media aritmetică a volumelor</b> obținute, pentru a fi folosită în calcule.</li>
+            </ol>
+            <div class="casuta-observatie">
+            <div class="observatie">
+                Observație: <br>
+                Dacă s-a ajuns la culoarea roșie, titrarea este "depășită", proba se aruncă și rezultatul nu se ia în considerare.
+            </div>
+            </div>
+
+            <br>
+            <h3>Metoda conductometrică</h3>
+            <ol>
+                <li>Se măsoară cu ajutorul unui cilindru gradat <b>100mL de apă</b> de la robinet și se introduce într-un flacon conic Erlenmeyer.</li>
+                <li>Se introduce <b>celula de conductivitate bine spălată cu apă distilată</b> în proba de analizat.</li>
+                <li>Se citește <b>conductivitatea soluției după fiecare adaos de 0,2mL soluție de titrant</b> din biuretă (HCl 0,1 M).</li>
+                <li>Se notează datele necesare pentru trasarea <b>graficului care descrie dependența conductivitate în funcție de volumul de titrant.</b></li>
+                <li>Se trasează <b>graficul</b> și se citește <b>volumul de soluție acidă (a)</b> corespunzător <b>punctului de echivalență</b>.</li>
+            </ol>
+            <div class="casuta-observatie">
+            <div class="observatie">
+                Observație: <br>
+                Volumul total de titrant adăugat trebuie să fie cel puțin (a+1)mL.
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <form>
+        <br><br>
+        <form>
+        <p class="centru text-informatii"><b>Scrie valoarea lui <i>a</i> mai jos pentru a modifica numărul de coloane din tabel.</b></p>
+        <p class="centru text-informatii"><b>
+            <label for="volumEchivalenta">a</label> = <input type="text" id="volumEchivalenta" name="volumEchivalenta">
+            <div class="centru">
+                <input type="button" class="butonFormular" id="butonTrimitereVolumEchivalenta" name="butonTrimitereVolumEchivalenta" value="Am scris corect a">
+                <label for="butonTrimitereVolumEchivalenta"></label>
+                <input type="reset" class="butonFormular" id="butonResetareVolumEchivalenta" name="butonResetareVolumEchivalenta" value="Sterge a">
+                <label for="butonResetareVolumEchivalenta"></label>
+            </div>
+        </b></p>
+        </form>
+
+        <form>
+        <table id="tabel-conductometrica">
+            <caption>Tabel folosit pentru prelucrarea datelor experimentale</caption>
+            <tbody>
+            <tr>
+                <th scope="row">Volumul de titrant (mL)</th>
+                <td><label for="conductivitate0" data-nrvolum="0">0</label></td>
+                <td><label for="conductivitate0.2" data-nrvolum="0.2">0,2</label></td>
+                <td><label for="conductivitate0.4" data-nrvolum="0.4">0,4</label></td>
+                <td><label for="conductivitate0.6" data-nrvolum="0.6">0,6</label></td>
+                <td><label for="conductivitate0.8" data-nrvolum="0.8">0,8</label></td>
+                <td><label for="conductivitate1" data-nrvolum="1">1</label></td>
+                <td><label for="conductivitate1.2" data-nrvolum="1.2">1,2</label></td>
+                <td><label for="conductivitate1.4" data-nrvolum="1.4">1,4</label></td>
+                <td><label for="conductivitate1.6" data-nrvolum="1.6">1,6</label></td>
+            </tr>
+            <tr>
+                <th scope="row">Conductivitate (&mu;S&#8901;cm<sup>-1</sup>)</th>
+                <td><input class="input-tabel" type="text" id="conductivitate0" name="conductivitate0" value="0"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.2" name="conductivitate0.2" value="0.2"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.4" name="conductivitate0.4" value="0.4"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.6" name="conductivitate0.6" value="0.6"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate0.8" name="conductivitate0.8" value="0.8"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1" name="conductivitate1" value="1"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1.2" name="conductivitate1.2" value="1.2"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1.4" name="conductivitate1.4" value="1.4"></td>
+                <td><input class="input-tabel" type="text" id="conductivitate1.6" name="conductivitate1.6" value="1.6"></td>
+            </tr>
+            </tbody>
+        </table>            
+        <p class="centru text-informatii"><b>Poți introduce datele în tabelul de mai sus!</b></p>
+        <div class="centru">
+            <input type="button" class="butonFormular" id="butonTrimitereTabel" name="butonTrimitereTabel" value="Am completat tabelul">
+            <label for="butonTrimitereTabel"></label>
+            <input type="reset" class="butonFormular" id="butonResetareTabel" name="butonResetareTabel" value="Sterge datele din tabel">
+            <label for="butonResetareTabel"></label>
+        </div>
+        </form>
+
+        <br><br>
+        <div class="centru text-informatii" id="mesaj-grafic"><b>Completează tabelul pentru a vedea graficul!</b></div>
+        <div id="loc-grafic" style="display: none;">
+            <canvas id="graficConductometrica" style="width: 100%; max-height: 600px"></canvas>
+        </div>
+        <br><br>
+        
+        <br><br>
+        <h2 class="centru">Calcule și rezultate</h2>
+        <div class="text-informatii">
+            &emsp;Se compară rezultatele obținute prin cele două metode. Se calculează <b>duritatea în grade germane a probei de apă de la robinet</b>.
+            <b>Cantitatea de HCl folosită la titrare este convertită în cantitate de CaO</b>, pe baza reacției chimice:
+            <div class="formule-chimice">
+                <br>2HCl + CaO &#8594; CaCl<sub>2</sub> + 2H<sub>2</sub>O
+            </div>
+            <br>Prin urmare:
+            <div class="calcule">
+            <br>2 moli HCl (2&#8901;36,5 g) reacționează cu 1 mol CaO (40+16)
+            </div>
+            <br>Rezultă:
+            <div class="calcule">
+            <br>la 3,65 mg HCl corespund......................2,8 mg CaO
+            <br>O soluție HCl 0,1 M: în 1000 mL soluție există 0,1 moli HCl = 0,1&#8901;36,5 g HCl 
+            <br>sau<br>1mL soluție......................0,1&#8901;36,5/1000 = 3,65 mg 2HCl
+            </div>
+            <br>Rezultă:
+            <div class="calcule">
+            <br>1 mL sol. HCl reacționează cu......................2,8 mg CaO
+            <br>a mL sol. HCl reacționează cu......................2,8&#8901;a mg CaO
+            </div>
+            <br>Cantitatea de <b>2,8&#8901;a mg CaO reprezintă conținutul de săruri solubile de calciu și magneziu din proba de 100 mL de apă de la robinet</b>.
+            <br><b>Definiția gradului de duritate german: 1&#176;dH = 10 mg CaO/L apă</b>
+            <div class="calcule">
+            <br>Pentru 10 mg CaO în 1000 mL apă corespunde 1&#176;dH
+            <br>Pentru 2,8&#8901;a&#8901;10 mg CaO în 1000 mL apă corespunde 2,8&#8901;a&#176;dH
+            </div>
+            <br>
+            <div class="casuta-observatie">
+            <div class="observatie">
+                Deci: d<sub>tp</sub>= 2,8&#8901;a&#176;dH
+            </div>
+            </div>
+        </div>
+    </main>
+</body>

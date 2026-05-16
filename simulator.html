@@ -9,19 +9,30 @@
 </head>
 
 <body>
-    <div id="experiment-laborator">
-        <h2>Duritatea Apei</h2>
+    <header>
+        <div class="centru">
+        <nav>
+            <a class="menu_option" href="" target="_self">SIMULATOR</a>
+            <a class="menu_option" href="mod_de_lucru.html" target="_self">MOD DE LUCRU</a>
+            <a class="menu_option" href="teorie.html" target="_self">TEORIE</a>
+        </nav>
+        </div>
+        <h1 class="centru">Duritatea apei</h1>
+        <h2 class="centru">Titrare cu HCl 0,1 M în prezența indicatorului metil oranj</h2>
+    </header>
 
+    <main class="centru">
+    <div class="main-casuta" id="experiment-laborator">
         <div class="ansamblu-biureta">
             <div class="cilindru-biureta">
                 <div class="gradatii-biureta"></div>
                 <div class="numere-biureta">
-                    <span id="nr-birueta0">0</span>
-                    <span id="nr-birueta2">2</span>
-                    <span id="nr-birueta4">4</span>
-                    <span id="nr-birueta6">6</span>
-                    <span id="nr-birueta8">8</span>
-                    <span id="nr-birueta10">10</span>
+                    <span id="nr-biureta0">0</span>
+                    <span id="nr-biureta2">2</span>
+                    <span id="nr-biureta4">4</span>
+                    <span id="nr-biureta6">6</span>
+                    <span id="nr-biureta8">8</span>
+                    <span id="nr-biureta10">10</span>
                 </div>
                 <div id="elementLichidBiureta" class="lichid-biureta"></div>
             </div>
@@ -34,28 +45,32 @@
             <div id="elementPicatura" class="picatura"></div>
         </div>
 
-        <div class="pahar">
-            <div class="gradatii-pahar">
-                <div id="gradatie-pahar1" class="linie-mare-gradatie-pahar"></div>
-                <span id="nr-pahar1" class="numar-pahar">100</span>
-                <div id="gradatie-pahar2" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar3" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar4" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar5" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar6" class="linie-mare-gradatie-pahar"></div>
-                <span id="nr-pahar2" class="numar-pahar">110</span>
-                <div id="gradatie-pahar7" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar8" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar9" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar10" class="linie-mica-gradatie-pahar"></div>
-                <div id="gradatie-pahar11" class="linie-mare-gradatie-pahar"></div>
-                <span id="nr-pahar3" class="numar-pahar">120</span>
+        <div class="ansamblu-pahar">
+            <div class="cerc-gat-pahar bucata-pahar"></div>
+            <div class="gat-pahar bucata-pahar"></div>
+            <div class="triunghi-pahar bucata-pahar">
+                <div class="gradatii-pahar">
+                    <div id="gradatie-pahar1" class="linie-mare-gradatie-pahar"></div>
+                    <span id="nr-pahar1" class="numar-pahar">100</span>
+                    <div id="gradatie-pahar2" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar3" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar4" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar5" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar6" class="linie-mare-gradatie-pahar"></div>
+                    <span id="nr-pahar2" class="numar-pahar">110</span>
+                    <div id="gradatie-pahar7" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar8" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar9" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar10" class="linie-mica-gradatie-pahar"></div>
+                    <div id="gradatie-pahar11" class="linie-mare-gradatie-pahar"></div>
+                    <span id="nr-pahar3" class="numar-pahar">120</span>
+                </div>
+                <div class="lichid-pahar" id="elementSolutiePahar"></div>
             </div>
-            <div class="lichid-pahar" id="elementSolutiePahar"></div>
         </div>
 
         <div class="panou-butoane">
-            <button id="butonPornestePicurare">Picură HCl 0.1 M</button>
+            <button id="butonPornestePicurare">Picură 1 ml HCl 0.1 M</button>
             <button id="butonOprestePicurare">Oprește picurarea</button>
             <button id="butonResetare">Reîncepe</button>
         </div>
@@ -63,9 +78,9 @@
         <div class="panou-informatii">
             <p><b>Proba:</b> Apă de la robinet (100 ml)</p>
             <p><b>Volum HCl:</b> <span id="elementTextVolum">0</span> ml</p>
-            <p><b>Culoare:</b> <span class="text-culoare" id="elementTextCuloare">Galben (Mediu neutru)</span></p>
-            <p class="text-duritate" id="elementTextDuritate"></p>
+            <p><b>Culoare:</b> <span class="textCuloareSolutie" id="textCuloareSolutiePahar">Galben (Mediu neutru)</span></p>
+            <p class="textDuritate" id="elementTextDuritate"></p>
         </div>
     </div>
-
+    </main>
 </body>
