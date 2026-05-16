@@ -18,10 +18,12 @@ const elementTextVolum = document.getElementById("elementTextVolum");
 const textCuloareSolutiePahar = document.getElementById("textCuloareSolutiePahar");
 const elementTextDuritate = document.getElementById("elementTextDuritate");
 let picurare = 1;
+let intervalPicurare;
 
 document.getElementById("butonPornestePicurare").addEventListener("click", () => {
     picurare = 1;
-    setInterval(function(){
+    clearInterval(intervalPicurare);
+    intervalPicurare = setInterval(function(){
         if (animatieInDesfasurare || volAdg >= volDepasit || picurare == 0) return;
 
         animatieInDesfasurare = true;
@@ -39,6 +41,8 @@ document.getElementById("butonPornestePicurare").addEventListener("click", () =>
             animatieInDesfasurare = false;
             if (volAdg < volDepasit) {
                 butonPornestePicurare.disabled = false;
+            } else {
+                clearInterval(intervalPicurare);
             }
         }, 400);
     }, 2000);
@@ -46,10 +50,12 @@ document.getElementById("butonPornestePicurare").addEventListener("click", () =>
 
 document.getElementById("butonOprestePicurare").addEventListener("click", () => {
     picurare = 0;
+    clearInterval(intervalPicurare);
 });
 
 document.getElementById("butonResetare").addEventListener("click", () => {
     picurare = 0;
+    clearInterval(intervalPicurare);
     volAdg = 0;
     nivCrtLichidBiureta = pozStartLichidBiureta;
     nivCrtLichidPahar = pozStartLichidPahar;
@@ -108,6 +114,7 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
 
         elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
         elementTextDuritate.style.color = "rgb(246, 120, 95)";
+        clearInterval(intervalPicurare);
     }
 }
 }
