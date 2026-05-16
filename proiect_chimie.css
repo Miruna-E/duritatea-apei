@@ -504,22 +504,27 @@ header{
 }
 
 .agitator {
-    width: 2.5rem;
-    height: 0.625rem;
+    width: 6rem;
+    height: 0.7rem;
     background-color: #f8f9fa;
     border-radius: 0.3125rem;
     position: absolute;
     bottom: 0.625rem;
-    left: 50%;
-    margin-left: -1.25rem;
+    /* left: 50%;
+    margin-left: -1.25rem; */
     box-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,0.5);
     z-index: 6;
-    animation: rotire 0.4s linear infinite;
+    animation: rotire 0.3s linear infinite;
+    display: flex;
 }
 
 @keyframes rotire {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from { 
+        transform: rotateY(0deg); 
+    }
+    to { 
+        transform: rotateY(360deg); 
+    }
 }
 
 .plita-magnetica {
