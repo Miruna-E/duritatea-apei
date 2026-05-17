@@ -1,7 +1,7 @@
 alert("JS is linked correctly!");
 console.log("JS is running");
 
-if (window.location.pathname=="/simulator.html") {
+if (window.location.pathname.endsWith("/index.html")) {
 let volAdg = 0;
 let volPctEchiv = 3;
 let volDepasit = 4;
@@ -220,7 +220,7 @@ function functieAgitator(){
 document.getElementById("butonAgitator").addEventListener("click", functieAgitator);
 }
 
-if (window.location.pathname=="/mod_de_lucru.html") {
+if (window.location.pathname.endsWith("/mod_de_lucru.html")) {
 let volumeAlaturateDiferenta = 0.2;
 let nrVolumTabel = [];
 
