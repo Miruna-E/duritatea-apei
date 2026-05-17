@@ -14,7 +14,7 @@ const unitPerMililitruPahar = 0.1875;
 let animatieInDesfasurare = false;
 
 const elementPicatura = document.getElementById("elementPicatura");
-const elementSolutiePahar = document.getElementById("elementSolutiePahar");
+// let elementSolutiePahar = document.getElementById("elementSolutiePahar");
 const elementLichidBiureta = document.getElementById("elementLichidBiureta");
 const elementTextVolum = document.getElementById("elementTextVolum");
 const textCuloareSolutiePahar = document.getElementById("textCuloareSolutiePahar");
@@ -22,6 +22,32 @@ const elementTextDuritate = document.getElementById("elementTextDuritate");
 const butonSchimbaApa = document.getElementById("butonSchimbaApa");
 const numeProbaText = document.getElementById("numeProbaText");
 const butonPornestePicurare = document.getElementById("butonPornestePicurare");
+const butonAdaugaApa = document.getElementById("butonAdaugaApa");
+const butonOprestePicurare = document.getElementById("butonOprestePicurare");
+const butonAgitator = document.getElementById("butonAgitator");
+const butonAdaugaIndicator = document.getElementById("butonAdaugaIndicator");
+
+document.getElementById("butonAdaugaApa").addEventListener("click", () => {
+    let nouLichidPahar = document.createElement("div");
+    nouLichidPahar.className = "lichid-pahar";
+    nouLichidPahar.id = "elementSolutiePahar";
+    elementSolutiePahar = nouLichidPahar;
+    document.getElementById("pahar-simulator").appendChild(elementSolutiePahar);
+    butonSchimbaApa.disabled = false;
+    butonAgitator.disabled = false;
+    butonAdaugaIndicator.disabled = false;
+    butonAdaugaApa.disabled = true;
+});
+
+document.getElementById("butonAdaugaIndicator").addEventListener("click", () => {
+    elementSolutiePahar.style.backgroundColor = "rgb(242, 211, 46)";
+    textCuloareSolutiePahar.innerText = "Galben (Mediu neutru)";
+    textCuloareSolutiePahar.style.color = "rgb(242, 211, 46)";
+    butonPornestePicurare.disabled = false;
+    butonPornestePicurare.style.backgroundColor = "rgb(59, 130, 246)";
+    butonOprestePicurare.disabled = false;
+    butonAdaugaIndicator.disabled = true;
+});
 
 let picurare = 1;
 let intervalPicurare;
@@ -35,19 +61,30 @@ function resetareSimulare() {
 
     elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
     elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-    elementSolutiePahar.style.backgroundColor = "rgb(242, 211, 46)";
+    elementSolutiePahar.style.backgroundColor = "rgba(154, 193, 211, 0.375)";
 
     elementTextVolum.innerText = volAdg.toFixed(1);
-    textCuloareSolutiePahar.innerText = "Galben (Mediu neutru)";
-    textCuloareSolutiePahar.style.color = "rgb(242, 211, 46)";
+    textCuloareSolutiePahar.innerText = "Incolor (Apă)";
+    textCuloareSolutiePahar.style.color = "rgb(96, 165, 250)";
 
     elementTextDuritate.style.display = "none";
     document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
     butonPornestePicurare.innerText = tipApaCurenta === "robinet" ? "Picură câte 1 ml HCl 0.1 M" : "Picură câte 0.1 ml HCl 0.1 M";
-    butonPornestePicurare.style.backgroundColor = "rgb(59, 130, 246)";
-    butonPornestePicurare.disabled = false;
+    
     document.getElementById("butonResetare").style.display = "none";
+
+    document.getElementById("pahar-simulator").removeChild(elementSolutiePahar);
+    butonPornestePicurare.disabled = true;
+    butonOprestePicurare.disabled = true;
+    butonAdaugaIndicator.disabled = true;
+    butonAgitator.disabled = true;
+    butonAdaugaApa.disabled = false;
+
+    butonPornestePicurare.style.backgroundColor = "rgb(100, 116, 139)";
+    if(butonAgitator.innerText === "Scoate agitator"){
+        functieAgitator();
+    }
 }
 
 butonSchimbaApa.addEventListener("click", () => {
@@ -66,6 +103,7 @@ butonSchimbaApa.addEventListener("click", () => {
         numeProbaText.innerText = "Apă de la robinet (100 ml)";
         butonSchimbaApa.innerText = "Schimbă: Apă distilată";
     }
+    butonSchimbaApa.disabled = true;
     resetareSimulare();
 });
 
@@ -160,7 +198,7 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
     }
 }
 
-document.getElementById("butonAgitator").addEventListener("click", () => {
+function functieAgitator(){
     let butonAgitator = document.getElementById("butonAgitator");
     let agitatori = document.getElementsByClassName("agitator");
     let styleAgitatori;
@@ -174,7 +212,9 @@ document.getElementById("butonAgitator").addEventListener("click", () => {
     for (let i = 0; i < agitatori.length; i++) {
         agitatori[i].style.display = styleAgitatori;
     }
-});
+}
+
+document.getElementById("butonAgitator").addEventListener("click", functieAgitator);
 }
 
 if (window.location.pathname=="/mod_de_lucru.html") {
