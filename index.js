@@ -185,9 +185,9 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
         if (tipApaCurenta === "distilata") {
-            elementTextDuritate.innerHTML = `Eroare: Pentru apa distilată, lipsită de capacitate de tamponare, punctul de echivalență este atins la aprox. 0.3 ml HCl. Adăugarea a 1 ml dintr-o dată a compromis proba!`;
+            elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa distilată, punctul de echivalență se atinge la aproximativ 0.3 ml)`;
         } else {
-            elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare.`;
+            elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa de la robinet, punctul de echivalență se atinge la aproximativ 3 ml)`;
         }
         
         elementTextDuritate.style.display = "block";
