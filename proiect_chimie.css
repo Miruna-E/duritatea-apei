@@ -374,6 +374,45 @@ header{
     100% { clip-path: inset(100% 0 0 0); opacity: 0; }
 }
 
+.ansamblu-stativ-suport-biureta{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stativ-biureta{
+    z-index: 0;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: 2.4rem;
+    height: 61rem;/* 34 - cilindru biureta, 6.48 - gat pahar, 20 - triunghi pahar */
+    border-radius: 0.4rem;
+    border-top: 0.15rem solid rgb(119, 118, 129);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+.stativ-biureta, .suport-biureta{ /*aspect metalic*/
+    background: linear-gradient(to right, rgb(72, 71, 74) 0%, rgba(141, 140, 148) 2%, rgb(119, 118, 129) 2%, rgb(119, 118, 129) 18%, rgba(31, 34, 47) 34%, rgba(31, 34, 47) 60%, rgb(119, 118, 129) 70%, rgb(119, 118, 129) 96%, rgb(72, 71, 74) 98%);
+}
+
+.suport-biureta{
+    z-index: 17;
+    top: 30%;
+    margin-top: 0rem;
+    width: 4rem;
+    height: 3rem;
+    border-top: none;
+    position: absolute;
+    border-bottom: none;
+    /*curbarea marginilor de sus*/
+    border-top-left-radius: 80% 1rem; 
+    border-top-right-radius: 80% 1rem;
+    border-bottom-left-radius: 80% 1rem; 
+    border-bottom-right-radius: 80% 1rem;
+}
+
 .ansamblu-pahar{
     position: relative; /*relative=>muta fata de pozitia initiala, centreaza paharul*/
     z-index: 5;
@@ -447,7 +486,7 @@ header{
     display: none; /* scapam de dublarea opacității (gâtul și corpul au acum 5% amândouă) */
 }
 
- .gradatii-pahar {
+.gradatii-pahar {
     position: absolute;
     bottom: 0;
     right: 3.4375rem;
@@ -532,9 +571,9 @@ header{
     z-index: 2;
     width: 14rem;
     height: 1.5rem;
-    background: linear-gradient(to bottom, #78909c, #455a64);
+    background: linear-gradient(to bottom, rgb(119, 118, 129), rgba(31, 34, 47));
     border-radius: 0.4rem;
-    border-top: 0.15rem solid #b0bec5;
+    border-top: 0.15rem solid rgb(119, 118, 129);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
     margin-bottom: 1.5rem;
 }
@@ -563,14 +602,14 @@ button, .butonFormular {
     background-color: rgb(59, 130, 246);
 }
 
-#butonSchimbaApa {
-    background-color: rgb(139, 92, 246);
-}
-
 .butonFormular{
-    background-color: rgb(136, 218, 125);
+    background-color: rgb(118, 198, 108);
     color: rgb(15, 46, 78);
     margin: 0.4rem;
+}
+
+#butonAgitator, #butonSchimbaApa{
+    background-color: rgb(0, 134, 146);
 }
 
 #butonPornestePicurare:hover, #butonOprestePicurare:hover{
@@ -578,13 +617,8 @@ button, .butonFormular {
     transform: translateY(-0.125rem);
 }
 
-#butonSchimbaApa:hover {
-    background-color: rgb(109, 40, 217);
-    transform: translateY(-0.125rem);
-}
-
-.butonFormular:hover{
-    background-color: rgb(249, 248, 113);
+.butonFormular:hover, #butonAgitator:hover, #butonSchimbaApa:hover{
+    background-color: rgb(6, 111, 121);
     transform: translateY(-0.125rem);
 }
 

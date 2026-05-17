@@ -159,6 +159,22 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         document.getElementById("butonResetare").style.display = "inline-block";
     }
 }
+
+document.getElementById("butonAgitator").addEventListener("click", () => {
+    let butonAgitator = document.getElementById("butonAgitator");
+    let agitatori = document.getElementsByClassName("agitator");
+    let styleAgitatori;
+    if(butonAgitator.innerText === "Introdu agitator"){
+        butonAgitator.innerText = "Scoate agitator";
+        styleAgitatori = "block";
+    } else {
+        butonAgitator.innerText = "Introdu agitator";
+        styleAgitatori = "none";
+    }
+    for (let i = 0; i < agitatori.length; i++) {
+        agitatori[i].style.display = styleAgitatori;
+    }
+});
 }
 
 if (window.location.pathname=="/mod_de_lucru.html") {
