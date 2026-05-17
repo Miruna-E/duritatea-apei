@@ -1,3 +1,6 @@
+alert("JS is linked correctly!");
+console.log("JS is running");
+
 if (window.location.pathname=="/simulator.html") {
 let volAdg = 0;
 let volPctEchiv = 3;
