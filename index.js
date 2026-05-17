@@ -1,4 +1,4 @@
-if (window.location.pathname.endsWith("/index.html")) {
+if (window.location.pathname.endsWith("/index.html") || path.endsWith("/")) {
 let volAdg = 0;
 let volPctEchiv = 3;
 let volDepasit = 4;
