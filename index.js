@@ -185,9 +185,9 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
         if (tipApaCurenta === "distilata") {
-            elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa distilată, punctul de echivalență se atinge la aproximativ 0.3 ml)`;
+            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa distilată, punctul de echivalență se atinge la aproximativ 0.3 ml)";
         } else {
-            elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa de la robinet, punctul de echivalență se atinge la aproximativ 3 ml)`;
+            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa de la robinet, punctul de echivalență se atinge la aproximativ 3 ml)";
         }
         
         elementTextDuritate.style.display = "block";
@@ -337,6 +337,9 @@ document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
             },
             scales: { //axele Ox, Oy
                 x: {
+                    min: 0,
+                    type: 'linear',
+                    beginAtZero: true,
                     grid: {
                         color: "rgba(0, 87, 122, 0.4)",
                     },
@@ -345,12 +348,12 @@ document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
                         font: {
                             size: 16,
                         },
-                        beginAtZero: true,
-                        min: 0,
-                        type: 'linear',
                     }
                 },
                 y: {
+                    min: 0,
+                    type: 'linear',
+                    beginAtZero: true,
                     grid: {
                         color: "rgba(0, 87, 122, 0.4)",
                     },
@@ -359,8 +362,6 @@ document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
                         font: {
                             size: 16,
                         },
-                        beginAtZero: true,
-                        min: 0,
                     }
                 }
             }
