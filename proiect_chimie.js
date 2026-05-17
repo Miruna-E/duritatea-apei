@@ -346,6 +346,8 @@ document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
                             size: 16,
                         },
                         beginAtZero: true,
+                        min: 0,
+                        type: 'linear',
                     }
                 },
                 y: {
@@ -358,6 +360,7 @@ document.getElementById("butonTrimitereTabel").addEventListener("click", () => {
                             size: 16,
                         },
                         beginAtZero: true,
+                        min: 0,
                     }
                 }
             }
