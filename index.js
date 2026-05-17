@@ -1,6 +1,3 @@
-alert("JS is linked correctly!");
-console.log("JS is running");
-
 if (window.location.pathname.endsWith("/index.html")) {
 let volAdg = 0;
 let volPctEchiv = 3;
