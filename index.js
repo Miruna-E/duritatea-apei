@@ -1,12 +1,13 @@
 if (window.location.pathname.endsWith("/index.html") || window.location.pathname.endsWith("/")) {
 let volAdg = 0;
 let volPctEchiv = 3;
-let volDepasit = 4;
+let volApa = 100;
 let tipApaCurenta = "robinet";
 let incrementVolum = 0.1;
+let volDepasit = volPctEchiv + incrementVolum;
 
 const pozStartLichidBiureta = 32.75;
-const pozStartLichidPahar = 1.5625;
+let pozStartLichidPahar = 1.5625;
 let nivCrtLichidBiureta = pozStartLichidBiureta;
 let nivCrtLichidPahar = pozStartLichidPahar;
 const unitPerMililitruBiureta = 3.0;
@@ -14,7 +15,7 @@ const unitPerMililitruPahar = 0.1875;
 let animatieInDesfasurare = false;
 
 const elementPicatura = document.getElementById("elementPicatura");
-// let elementSolutiePahar = document.getElementById("elementSolutiePahar");
+let elementSolutiePahar = document.getElementById("elementSolutiePahar");
 const elementLichidBiureta = document.getElementById("elementLichidBiureta");
 const elementTextVolum = document.getElementById("elementTextVolum");
 const textCuloareSolutiePahar = document.getElementById("textCuloareSolutiePahar");
@@ -26,6 +27,50 @@ const butonAdaugaApa = document.getElementById("butonAdaugaApa");
 const butonOprestePicurare = document.getElementById("butonOprestePicurare");
 const butonAgitator = document.getElementById("butonAgitator");
 const butonAdaugaIndicator = document.getElementById("butonAdaugaIndicator");
+
+const buton100mlApa = document.getElementById("buton100mlApa");
+const buton75mlApa = document.getElementById("buton75mlApa");
+const buton50mlApa = document.getElementById("buton50mlApa");
+const buton25mlApa = document.getElementById("buton25mlApa");
+
+buton100mlApa.addEventListener("click", schimbaVolInitialApa, false);
+buton75mlApa.addEventListener("click", schimbaVolInitialApa, false);
+buton50mlApa.addEventListener("click", schimbaVolInitialApa, false);
+buton25mlApa.addEventListener("click", schimbaVolInitialApa, false);
+
+buton100mlApa.volInitialApa = 100;
+buton75mlApa.volInitialApa = 75;
+buton50mlApa.volInitialApa = 50;
+buton25mlApa.volInitialApa = 25;
+
+function schimbaVolInitialApa(butonCrt){
+    volApa = butonCrt.currentTarget.volInitialApa;
+    if (tipApaCurenta === "robinet") {
+        volPctEchiv = 3 * volApa/100;
+        numeProbaText.innerText = `Apă de la robinet (${volApa} ml)`;
+    } else {
+        volPctEchiv = 0.3 * volApa/100;
+        numeProbaText.innerText = `Apă distilată (${volApa} ml)`;
+    }
+    volDepasit = volPctEchiv + incrementVolum;
+    switch(volApa){
+        case 100:
+            pozStartLichidPahar = 1.5625;
+            break;
+        case 75:
+            pozStartLichidPahar = 1.17;
+            break;
+        case 50:
+            pozStartLichidPahar = 0.78;
+            break;
+        case 25:
+            pozStartLichidPahar = 0.39;
+            break;
+    }
+    nivCrtLichidPahar = pozStartLichidPahar;
+    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
+}
+
 
 document.getElementById("butonAdaugaApa").addEventListener("click", () => {
     let nouLichidPahar = document.createElement("div");
@@ -46,6 +91,11 @@ document.getElementById("butonAdaugaIndicator").addEventListener("click", () => 
     butonPornestePicurare.style.backgroundColor = "rgb(59, 130, 246)";
     butonOprestePicurare.disabled = false;
     butonAdaugaIndicator.disabled = true;
+    buton100mlApa.disabled = true;
+    buton75mlApa.disabled = true;
+    buton50mlApa.disabled = true;
+    buton25mlApa.disabled = true;
+    document.getElementById("butonResetare").style.display = "inline-block";
 });
 
 let picurare = 1;
@@ -79,6 +129,10 @@ function resetareSimulare() {
     butonAdaugaIndicator.disabled = true;
     butonAgitator.disabled = true;
     butonAdaugaApa.disabled = false;
+    buton100mlApa.disabled = false;
+    buton75mlApa.disabled = false;
+    buton50mlApa.disabled = false;
+    buton25mlApa.disabled = false;
 
     butonPornestePicurare.style.backgroundColor = "rgb(100, 116, 139)";
     if(butonAgitator.innerText === "Scoate agitator"){
@@ -89,17 +143,16 @@ function resetareSimulare() {
 butonSchimbaApa.addEventListener("click", () => {
     if (tipApaCurenta === "robinet") {
         tipApaCurenta = "distilata";
-        volPctEchiv = 0.3;
-        volDepasit = 0.4;
-        numeProbaText.innerText = "Apă distilată";
+        volPctEchiv = 0.3 * volApa/100;
+        numeProbaText.innerText = `Apă distilată (${volApa} ml)`;
         butonSchimbaApa.innerText = "Schimbă: Apă de la robinet";
     } else {
         tipApaCurenta = "robinet";
-        volPctEchiv = 3;
-        volDepasit = 4;
-        numeProbaText.innerText = "Apă de la robinet";
+        volPctEchiv = 3 * volApa/100;
+        numeProbaText.innerText = `Apă de la robinet (${volApa} ml)`;
         butonSchimbaApa.innerText = "Schimbă: Apă distilată";
     }
+    volDepasit = volPctEchiv + incrementVolum;
     resetareSimulare();
 });
 
@@ -154,7 +207,7 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         butonPornestePicurare.innerText = "Mai picură 0.1 ml (Atenție!)";
         butonPornestePicurare.style.backgroundColor = "rgb(234, 144, 8)";
 
-        let duritate = (2.8 * volAdg).toFixed(2);
+        let duritate = (2.8 * volAdg * 100/volApa).toFixed(2);
         elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
         
         elementTextDuritate.style.display = "block";
@@ -175,9 +228,9 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
         if (tipApaCurenta === "distilata") {
-            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa distilată, punctul de echivalență se atinge la aproximativ 0.3 ml)";
+            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa distilată, punctul de echivalență se atinge la aproximativ 0.3 × volumul de apă ml)";
         } else {
-            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa de la robinet, punctul de echivalență se atinge la aproximativ 3 ml)";
+            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa de la robinet, punctul de echivalență se atinge la aproximativ 3 × volumul de apă ml)";
         }
         
         elementTextDuritate.style.display = "block";
