@@ -23,7 +23,6 @@ const elementTextDuritate = document.getElementById("elementTextDuritate");
 const butonSchimbaApa = document.getElementById("butonSchimbaApa");
 const numeProbaText = document.getElementById("numeProbaText");
 const butonPornestePicurare = document.getElementById("butonPornestePicurare");
-const butonAdaugaApa = document.getElementById("butonAdaugaApa");
 const butonOprestePicurare = document.getElementById("butonOprestePicurare");
 const butonAgitator = document.getElementById("butonAgitator");
 const butonAdaugaIndicator = document.getElementById("butonAdaugaIndicator");
@@ -31,17 +30,14 @@ const butonAdaugaIndicator = document.getElementById("butonAdaugaIndicator");
 const buton100mlApa = document.getElementById("buton100mlApa");
 const buton75mlApa = document.getElementById("buton75mlApa");
 const buton50mlApa = document.getElementById("buton50mlApa");
-const buton25mlApa = document.getElementById("buton25mlApa");
 
 buton100mlApa.addEventListener("click", schimbaVolInitialApa, false);
 buton75mlApa.addEventListener("click", schimbaVolInitialApa, false);
 buton50mlApa.addEventListener("click", schimbaVolInitialApa, false);
-buton25mlApa.addEventListener("click", schimbaVolInitialApa, false);
 
 buton100mlApa.volInitialApa = 100;
 buton75mlApa.volInitialApa = 75;
 buton50mlApa.volInitialApa = 50;
-buton25mlApa.volInitialApa = 25;
 
 function schimbaVolInitialApa(butonCrt){
     volApa = butonCrt.currentTarget.volInitialApa;
@@ -63,25 +59,25 @@ function schimbaVolInitialApa(butonCrt){
         case 50:
             pozStartLichidPahar = 0.78;
             break;
-        case 25:
-            pozStartLichidPahar = 0.39;
-            break;
     }
     nivCrtLichidPahar = pozStartLichidPahar;
-    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-}
 
-
-document.getElementById("butonAdaugaApa").addEventListener("click", () => {
     let nouLichidPahar = document.createElement("div");
     nouLichidPahar.className = "lichid-pahar";
     nouLichidPahar.id = "elementSolutiePahar";
     elementSolutiePahar = nouLichidPahar;
     document.getElementById("pahar-simulator").appendChild(elementSolutiePahar);
+
+    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
+
     butonAgitator.disabled = false;
     butonAdaugaIndicator.disabled = false;
-    butonAdaugaApa.disabled = true;
-});
+    butonSchimbaApa.disabled = false;
+
+    buton100mlApa.disabled = true;
+    buton75mlApa.disabled = true;
+    buton50mlApa.disabled = true;
+}
 
 document.getElementById("butonAdaugaIndicator").addEventListener("click", () => {
     elementSolutiePahar.style.backgroundColor = "rgb(242, 211, 46)";
@@ -94,7 +90,6 @@ document.getElementById("butonAdaugaIndicator").addEventListener("click", () => 
     buton100mlApa.disabled = true;
     buton75mlApa.disabled = true;
     buton50mlApa.disabled = true;
-    buton25mlApa.disabled = true;
     document.getElementById("butonResetare").style.display = "inline-block";
 });
 
@@ -109,30 +104,32 @@ function resetareSimulare() {
     nivCrtLichidPahar = pozStartLichidPahar;
 
     elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
-    elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
-    elementSolutiePahar.style.backgroundColor = "rgba(154, 193, 211, 0.375)";
+    if (elementSolutiePahar) {
+        elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
+        elementSolutiePahar.style.backgroundColor = "rgba(154, 193, 211, 0.375)";
+    }
 
-    elementTextVolum.innerText = volAdg.toFixed(1);
+    elementTextVolum.innerText = volAdg.toFixed(2);
     textCuloareSolutiePahar.innerText = "Incolor (Apă)";
     textCuloareSolutiePahar.style.color = "rgb(96, 165, 250)";
 
     elementTextDuritate.style.display = "none";
     document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
-    butonPornestePicurare.innerText = "Picură câte 0.1 ml HCl 0.1 M";
+    butonPornestePicurare.innerText = tipApaCurenta === "distilata" ? "Picură câte 0.05 ml HCl 0.1 M" : "Picură câte 0.1 ml HCl 0.1 M";
     
     document.getElementById("butonResetare").style.display = "none";
 
-    document.getElementById("pahar-simulator").removeChild(elementSolutiePahar);
+    if (elementSolutiePahar && document.getElementById("pahar-simulator").contains(elementSolutiePahar)) {
+        document.getElementById("pahar-simulator").removeChild(elementSolutiePahar);
+    }
     butonPornestePicurare.disabled = true;
     butonOprestePicurare.disabled = true;
     butonAdaugaIndicator.disabled = true;
     butonAgitator.disabled = true;
-    butonAdaugaApa.disabled = false;
     buton100mlApa.disabled = false;
     buton75mlApa.disabled = false;
     buton50mlApa.disabled = false;
-    buton25mlApa.disabled = false;
 
     butonPornestePicurare.style.backgroundColor = "rgb(100, 116, 139)";
     if(butonAgitator.innerText === "Scoate agitator"){
@@ -144,11 +141,13 @@ butonSchimbaApa.addEventListener("click", () => {
     if (tipApaCurenta === "robinet") {
         tipApaCurenta = "distilata";
         volPctEchiv = 0.3 * volApa/100;
+        incrementVolum = 0.05;
         numeProbaText.innerText = `Apă distilată (${volApa} ml)`;
         butonSchimbaApa.innerText = "Schimbă: Apă de la robinet";
     } else {
         tipApaCurenta = "robinet";
         volPctEchiv = 3 * volApa/100;
+        incrementVolum = 0.1;
         numeProbaText.innerText = `Apă de la robinet (${volApa} ml)`;
         butonSchimbaApa.innerText = "Schimbă: Apă distilată";
     }
@@ -167,6 +166,12 @@ document.getElementById("butonPornestePicurare").addEventListener("click", () =>
 
         nivCrtLichidBiureta -= (unitPerMililitruBiureta * incrementVolum);
         elementLichidBiureta.style.height = nivCrtLichidBiureta + "rem";
+
+        if (tipApaCurenta === "robinet") {
+            elementPicatura.classList.add("forma-jet");
+        } else {
+            elementPicatura.classList.remove("forma-jet");
+        }
 
         elementPicatura.classList.remove("animatie-cadere");
         void elementPicatura.offsetWidth;
@@ -192,32 +197,30 @@ document.getElementById("butonOprestePicurare").addEventListener("click", () => 
 document.getElementById("butonResetare").addEventListener("click", resetareSimulare);
 
 function actualizeazaNivPaharSiVerifPctEchiv() {
-    volAdg = Math.round((volAdg + incrementVolum) * 10) / 10;
+    volAdg = Math.round((volAdg + incrementVolum) * 100) / 100;
 
     nivCrtLichidPahar += (unitPerMililitruPahar * incrementVolum);
     elementSolutiePahar.style.height = nivCrtLichidPahar + "rem";
 
-    elementTextVolum.innerText = volAdg.toFixed(1);
+    elementTextVolum.innerText = volAdg.toFixed(2);
 
-    if (volAdg === volPctEchiv) {
+    if (volAdg >= volPctEchiv && volAdg < volDepasit) {
         elementSolutiePahar.style.backgroundColor = "rgb(197, 87, 0)";
         textCuloareSolutiePahar.innerText = "Echivalență! Culoare Portocalie";
         textCuloareSolutiePahar.style.color = "rgb(234, 144, 8)";
 
-        butonPornestePicurare.innerText = "Mai picură 0.1 ml (Atenție!)";
+        butonPornestePicurare.innerText = tipApaCurenta === "distilata" ? "Mai picură 0.05 ml (Atenție!)" : "Mai picură 0.1 ml (Atenție!)";
         butonPornestePicurare.style.backgroundColor = "rgb(234, 144, 8)";
 
         let duritate = (2.8 * volAdg * 100/volApa).toFixed(2);
-        elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} = ${duritate} °dH`;
+        elementTextDuritate.innerHTML = `Duritate calculată: d<sub>tp</sub> = 2.8 × ${volAdg} × (100 / ${volApa}) = ${duritate} °dH`;
         
         elementTextDuritate.style.display = "block";
         elementTextDuritate.style.color = "rgb(136, 218, 125)";
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 60, 45)";
 
         document.getElementById("butonResetare").style.display = "inline-block";
-    }
-
-    if (volAdg >= volDepasit) {
+    } else if (volAdg >= volDepasit) {
         elementSolutiePahar.style.backgroundColor = "rgb(103, 29, 14)";
         textCuloareSolutiePahar.innerText = "Titrarea este depășită! (Roșu)";
         textCuloareSolutiePahar.style.color = "rgb(246, 120, 95)";
@@ -227,11 +230,7 @@ function actualizeazaNivPaharSiVerifPctEchiv() {
         butonPornestePicurare.style.backgroundColor = "rgb(100, 116, 139)";
         document.getElementById("experiment-laborator").style.backgroundColor = "rgb(43, 43, 54)";
 
-        if (tipApaCurenta === "distilata") {
-            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa distilată, punctul de echivalență se atinge la aproximativ 0.3 × volumul de apă ml)";
-        } else {
-            elementTextDuritate.innerHTML = "Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă și rezultatul nu se ia în considerare. (Pentru apa de la robinet, punctul de echivalență se atinge la aproximativ 3 × volumul de apă ml)";
-        }
+        elementTextDuritate.innerHTML = `Eroare: Ai trecut peste culoarea portocalie. Proba se aruncă. (Punctul de echivalență se atingea la ${volPctEchiv} ml)`;
         
         elementTextDuritate.style.display = "block";
         elementTextDuritate.style.color = "rgb(246, 120, 95)";
@@ -287,10 +286,8 @@ document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("clic
     a = Number(a);
     localStorage.setItem("volumEchivalenta", a);
 
-    let casuteVolumTabel = document.getElementsByTagName("tr")[0].getElementsByTagName("td"); //=> nu include header
-    //initial, ultimul element este: <td><label for="conductivitate1.6" data-nrvolum="1.6">1,6</label></td>
-    let casuteInputTabel = document.getElementsByTagName("tr")[1].getElementsByTagName("td"); //=> nu include header
-    //initial, ultimul element este: <td><input class="input-tabel" type="text" id="conductivitate1.6" name="conductivitate1.6"></td>
+    let casuteVolumTabel = document.getElementsByTagName("tr")[0].getElementsByTagName("td"); // => nu include header
+    let casuteInputTabel = document.getElementsByTagName("tr")[1].getElementsByTagName("td"); // => nu include header
 
     let randVolumTabel = document.getElementsByTagName("tr")[0];
     let randInputTabel = document.getElementsByTagName("tr")[1];
@@ -308,6 +305,7 @@ document.getElementById("butonTrimitereVolumEchivalenta").addEventListener("clic
         let valoareVolumTabelNou = Math.round((Number(volumTabel[i].dataset.nrvolum) + volumeAlaturateDiferenta) * 100)/100;
         casutaVolumTabelNouLabel.setAttribute("data-nrvolum", String(Number(volumTabel[i].dataset.nrvolum) + volumeAlaturateDiferenta));
         casutaVolumTabelNouLabel.setAttribute("data-nrvolum", String(valoareVolumTabelNou));
+        casutaVolumTaharNouLabel = casutaVolumTabelNouLabel; // typing fallback check
         casutaVolumTabelNouLabel.setAttribute("for", "conductivitate" + casutaVolumTabelNouLabel.getAttribute("data-nrvolum"));
         casutaVolumTabelNouLabel.textContent = casutaVolumTabelNouLabel.dataset.nrvolum;
         casutaVolumTabelNouLabel.textContent = casutaVolumTabelNouLabel.textContent.replace(".", ","); //initial cu "." pentru a converti usor din string in number
