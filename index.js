@@ -4,7 +4,7 @@ let volPctEchiv = 3;
 let volApa = 100;
 let tipApaCurenta = "robinet";
 let incrementVolum = 0.1;
-let volDepasit = volPctEchiv + incrementVolum;
+let volDepasit = Math.round((volPctEchiv + incrementVolum) * 100) / 100;
 
 const pozStartLichidBiureta = 32.75;
 let pozStartLichidPahar = 1.5625;
@@ -45,10 +45,10 @@ function schimbaVolInitialApa(butonCrt){
         volPctEchiv = 3 * volApa/100;
         numeProbaText.innerText = `Apă de la robinet (${volApa} ml)`;
     } else {
-        volPctEchiv = 0.3 * volApa/100;
+        volPctEchiv = 0.2 * volApa/100;
         numeProbaText.innerText = `Apă distilată (${volApa} ml)`;
     }
-    volDepasit = volPctEchiv + incrementVolum;
+    volDepasit = Math.round((volPctEchiv + incrementVolum) * 100) / 100;
     switch(volApa){
         case 100:
             pozStartLichidPahar = 1.5625;
@@ -140,7 +140,7 @@ function resetareSimulare() {
 butonSchimbaApa.addEventListener("click", () => {
     if (tipApaCurenta === "robinet") {
         tipApaCurenta = "distilata";
-        volPctEchiv = 0.3 * volApa/100;
+        volPctEchiv = 0.2 * volApa/100;
         incrementVolum = 0.05;
         numeProbaText.innerText = `Apă distilată (${volApa} ml)`;
         butonSchimbaApa.innerText = "Schimbă: Apă de la robinet";
@@ -151,7 +151,7 @@ butonSchimbaApa.addEventListener("click", () => {
         numeProbaText.innerText = `Apă de la robinet (${volApa} ml)`;
         butonSchimbaApa.innerText = "Schimbă: Apă distilată";
     }
-    volDepasit = volPctEchiv + incrementVolum;
+    volDepasit = Math.round((volPctEchiv + incrementVolum) * 100) / 100;
     resetareSimulare();
 });
 
